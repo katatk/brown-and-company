@@ -1,0 +1,10 @@
+{% extends 'template.twig' %}
+
+
+{% block content %}
+	{{ page.output()|raw }}
+	<br class="clear" />
+	{% for testimonial in controller.callStatic('Testimonial', 'loadAllActive') %}
+		{% include 'general/sections/testimonial.twig' %}
+	{% endfor %}
+{% endblock %}

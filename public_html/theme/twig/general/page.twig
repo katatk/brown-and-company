@@ -1,0 +1,22 @@
+{% extends 'template.twig' %}
+
+{% block content %}
+  <div class="container main-content">
+    {% if page.contentTitle != '' %}
+      <h1>{{ page.contentTitle }}</h1>
+    {% endif %}
+    <div class="row">
+      <div class="col-12 col-lg-6 mb-12 mb-lg-0">
+        {{ page.content|raw }}
+      </div>
+      <div class="col-12 col-lg-6">
+        {% if page.image.tag() != null %}
+          <div class="float-right">
+            {{ page.image.tag()|raw }}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

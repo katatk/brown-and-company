@@ -1,0 +1,22 @@
+{% extends 'template.twig' %}
+
+{% block content %}
+  <div class="container-fluid px-0 bg-img" style="background: url('{{ page.auxImage.getFullLink()|raw }}') no-repeat center right;background-size: 50%  auto">
+    <div class="container main-content">
+      <h1>{{ page.contentTitle }}</h1>
+      <div class="row">
+        <div class="col-12 col-lg-6 mb-12 mb-lg-0">
+          {{ page.content|raw }}
+          <span class="button mt-4 form-button">{{ page.buttonText }} </span>
+
+        </div>
+          <div class="col-12 col-lg-6">
+            {% if page.auxImage.getFullLink() != null %}
+              <div class="float-right"><img src='{{ page.auxImage.getFullLink()|raw }}' alt="Matipo Garage {{ page.title }}" class="aux-img"></div>
+            {% endif %}
+          </div>
+      </div>
+      </div>
+  </div>
+
+{% endblock %}

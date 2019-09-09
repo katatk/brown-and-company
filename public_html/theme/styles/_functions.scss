@@ -1,0 +1,370 @@
+// For mitigating scssphp bug
+$TEMPORARY_ABOVE_GLOBAL: 0;
+$TEMPORARY_BELOW_GLOBAL: 0;
+
+///
+/// Only displays styles above a certain number of pixels wide
+/// @param		number	$aboveAmount	The number of pixels to be above
+/// @content							The content to display below that number of pixels
+/// @output								Styles to display below that width
+///
+@mixin above($aboveAmount) {
+  // Mitigates scssphp bug, which is not scoping variables correctly
+  $TEMPORARY_ABOVE_GLOBAL: $aboveAmount !global;
+  $belowAmount: $TEMPORARY_BELOW_GLOBAL !global;
+
+  @media screen and (min-width: $aboveAmount + 1px) {
+    @content;
+  }
+}
+
+///
+/// Creates an animation
+/// @param		string	$name	The name of the animation
+/// @content					The animation contents
+/// @output						The CSS for the animation
+///
+@mixin animation($name) {
+  @-webkit-keyframes #{$name} {
+    @content;
+  }
+
+  @-moz-keyframes #{$name} {
+    @content;
+  }
+
+  @-o-keyframes #{$name} {
+    @content;
+  }
+
+  @keyframes #{$name} {
+    @content;
+  }
+}
+
+///
+/// Only displays styles below a certain number of pixels wide
+/// @param		number	$belowAmount	The number of pixels to be below
+/// @content							The content to display below that number of pixels
+/// @output								Styles to display below that width
+///
+@mixin below($belowAmount) {
+  // Mitigates scssphp bug, which is not scoping variables correctly
+  $TEMPORARY_BELOW_GLOBAL: $belowAmount !global;
+  $aboveAmount: $TEMPORARY_ABOVE_GLOBAL !global;
+
+  @media screen and (max-width: $belowAmount - 1px) {
+    @content;
+  }
+}
+
+///
+/// Only displays styles between a certain range of pixels wide
+/// @param		number	$pixels		The number of pixels to be above or equal to
+/// @param		number	$pixels		The number of pixels to be below or equal to
+/// @content						The content to display between the range of pixels
+/// @output							Styles to display between that range
+///
+@mixin between($minPixels, $maxPixels) {
+  @media screen and (min-width: $minPixels) and (max-width: $maxPixels) {
+    @content;
+  }
+}
+
+/// Only display mobile menu when responsive is on and below the right responsive limit
+/// @content	The content to display below the menu toggle point
+/// @output		Styles to display below the limit
+//noinspection CssInvalidFunction
+@mixin do-mobile-nav {
+  @include below($MENU-TOGGLE-BREAKPOINT) {
+    @content;
+  }
+}
+
+//noinspection CssInvalidFunction
+@mixin do-not-do-mobile-nav {
+  @include above($MENU-TOGGLE-BREAKPOINT - 1px) {
+    @content;
+  }
+}
+
+///
+/// Creates a triple stack using a background gradient
+/// @param		colour	$bars			The bar colour
+/// @param		colour	$background		The background colour (usually transparent)
+/// @param		bool	$horizontal		If the gradient should be horizontal
+/// @output								Styles for that type of gradient
+///
+@mixin burger($bars, $background: rgba(255, 255, 255, 0), $bar1End: 18, $horizontal: false) {
+  $spacing: ceil((100 - $bar1End * 3) / 2);
+  $bar2Start: $bar1End;
+  $bar2End: $bar2Start + $spacing;
+  $bar3Start: $bar2End;
+  $bar3End: $bar3Start + $bar1End;
+  $bar4Start: $bar3End;
+  $bar4End: $bar4Start + $spacing;
+  $bar5Start: $bar4End;
+
+  background: $bars;
+  background: -moz-linear-gradient(top, #{$bars} 0%, #{$bars} #{$bar1End + "%"}, #{$background} #{$bar2Start + "%"}, #{$background} #{$bar2End + "%"}, #{$bars} #{$bar3Start + "%"}, #{$bars} #{$bar3End + "%"}, #{$background} #{$bar4Start + "%"}, #{$background} #{$bar4End + "%"}, #{$bars} #{$bar5Start + "%"}, #{$bars} 100%);
+  background: -webkit-linear-gradient(top, #{$bars} 0%, #{$bars} #{$bar1End + "%"}, #{$background} #{$bar2Start + "%"}, #{$background} #{$bar2End + "%"}, #{$bars} #{$bar3Start + "%"}, #{$bars} #{$bar3End + "%"}, #{$background} #{$bar4Start + "%"}, #{$background} #{$bar4End + "%"}, #{$bars} #{$bar5Start + "%"}, #{$bars} 100%);
+  background: linear-gradient(to bottom, #{$bars} 0%, #{$bars} #{$bar1End + "%"}, #{$background} #{$bar2Start + "%"}, #{$background} #{$bar2End + "%"}, #{$bars} #{$bar3Start + "%"}, #{$bars} #{$bar3End + "%"}, #{$background} #{$bar4Start + "%"}, #{$background} #{$bar4End + "%"}, #{$bars} #{$bar5Start + "%"}, #{$bars} 100%);
+}
+
+///
+/// Creates a simple gradient
+/// @param		colour	$start			The start colour
+/// @param		colour	$end			The end colour
+/// @param		bool	$horizontal		If the gradient should be horizontal
+/// @output								Styles for that type of gradient
+///
+@mixin gradient($start, $end, $horizontal: false) {
+  background: $start;
+  background: -moz-linear-gradient(if($horizontal, left, top), $start 0%, $end 100%);
+  background: -webkit-gradient(linear, left top, if($horizontal, right top, left bottom), color-stop(0%, $start), color-stop(100%, $end));
+  background: -webkit-linear-gradient(if($horizontal, left, top), $start 0%, $end 100%);
+  background: -o-linear-gradient(if($horizontal, left, top), $start 0%, $end 100%);
+  background: -ms-linear-gradient(if($horizontal, left, top), $start 0%, $end 100%);
+  background: linear-gradient(if($horizontal, left, top), $start 0%, $end 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#{"'" + ie-hex-str($start) + "'"}, endColorstr=#{"'" + ie-hex-str($end) + "'"}, GradientType=if($horizontal, 1, 0));
+}
+
+///
+/// Applies styles to all headings
+/// @content	The styles to apply
+/// @output		Applies styles to headings from h1 through h6
+///
+@mixin headings {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @content;
+  }
+}
+
+/// Applies styles to all the kinds of fields you could get in a form
+/// @content	The styles to apply
+/// @output		Applies styles to various form fields
+///
+@mixin form-fields {
+  @include form-inputs {
+    @content;
+  }
+
+
+  select,
+  textarea,
+  .upload-button {
+    @content;
+  }
+}
+
+/// Applies styles to all the kinds of input you could get in a form
+/// @content	The styles to apply
+/// @output		Applies styles to various inputs
+///
+@mixin form-inputs {
+  input[type=text],
+  input[type=password],
+  input[type=number],
+  input[type=email],
+  input[type=tel],
+  input[type=date],
+  input[type=datetime-local],
+  input[type=month],
+  input[type=search],
+  input[type=time],
+  input[type=url] {
+    @content;
+  }
+}
+
+/// Iterates over a map of properties and outputs them
+/// @param		map		$properties		The properties to iterate over
+/// @output								All of the properties
+@mixin iterate-over($properties) {
+  @each $property, $value in $properties {
+    #{$property}: $value;
+  }
+}
+
+/// Applies $if-properties if the device is a touch device, otherwise applies $else-properties
+/// @param		map		$if-properties		The properties to apply if the device is a touch device
+/// @param		map		$else-properties	The properties to apply if the device is not a touch device
+/// @output									Styles to trigger the appropriate properties for the device
+@mixin if-touch($if-properties, $else-properties) {
+  @include iterate-over($else-properties);
+
+  //noinspection CssInvalidMediaFeature
+  @media all and (hover: none) {
+    @include iterate-over($if-properties);
+  }
+
+  html.touch & {
+    @include iterate-over($if-properties);
+
+    //noinspection CssInvalidMediaFeature
+    @media all and (hover: hover) {
+      @include iterate-over($else-properties);
+    }
+  }
+}
+
+///
+/// Applies styles to the hover, focus and active pseudoclasses of an element
+/// @content	The styles to apply
+/// @output		Hover, focus and active styles for that element
+///
+@mixin hover {
+  &:hover,
+  &:focus,
+  &:active {
+    @content;
+  }
+}
+
+///
+/// Applies provided styles to the placeholder of the current element
+/// @content	The styles to apply
+/// @output		Styles, applied to the element
+///
+//noinspection CssInvalidPseudoSelector
+@mixin placeholder {
+  // Note that each selector has to be applied separately, as a single unrecognised selector invalidates the entire group
+  &:-ms-input-placeholder {
+    @content;
+  }
+
+  &::-webkit-input-placeholder {
+    @content;
+  }
+
+  &:input-placeholder {
+    @content;
+  }
+
+  &::input-placeholder {
+    @content;
+  }
+
+  &:moz-placeholder {
+    @content;
+  }
+
+  &::moz-placeholder {
+    @content;
+  }
+
+  &:placeholder {
+    @content;
+  }
+
+  &::placeholder {
+    @content;
+  }
+}
+
+///
+/// Only displays styles below the responsive limit
+/// @content	The content to display below the reponsive limit
+/// @output		Styles to display below the limit
+///
+@mixin responsive {
+  @include below($MENU-TOGGLE-BREAKPOINT) {
+    @content;
+  }
+}
+
+///
+/// Targets print styles
+/// @content	The content to display to the printer
+/// @output		The styles, wrapped in a print media query
+///
+@mixin print {
+  @media print {
+    @content;
+  }
+}
+
+///
+/// Creates vendor specific versions of a style
+/// @param	string	$property	The property to create each style for
+/// @param	list	$value		The value for that style
+/// @output						Vendor specific versions of each style
+///
+//noinspection CssInvalidMediaFeature
+@mixin vendor-specific($property, $value) {
+  #{$property}: $value;
+
+  @each $vendor in "ms", "moz", "o", "webkit" {
+    #{"-" + $vendor + "-" + $property}: $value;
+  }
+}
+
+@mixin underline($color: $PRIMARY-HIGHLIGHT, $location: "bottom", $align: "left", $padding: 2rem) {
+  position: relative;
+
+  @if $location == "top" {
+    padding-top: $padding;
+  }
+  @else {
+    padding-bottom: $padding;
+  }
+
+  &:before {
+    position: absolute;
+    content: '';
+    display: block;
+    background-color: $color;
+    width: 40px;
+    height: 2px;
+
+    @if $location == "top" {
+      top: 0;
+    }
+    @else {
+      bottom: 0;
+    }
+
+    @if $align == "center" {
+      left: calc(50% - 14px);
+    }
+    @else {
+      left: 0;
+    }
+  }
+}
+
+// make background image center, no-repeat, cover;
+@mixin bg {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+///
+/// Turn an element or :before, :after into absolutely positioned block
+///
+%absolute-pseudo-block {
+  content: '';
+  display: block;
+  position: absolute;
+}
+
+///
+/// Removes element from page flow
+///
+%clearfix {
+  &:before,
+  &:after {
+    content: ".";
+    clear: both;
+    display: block;
+    visibility: hidden;
+    height: 0;
+    line-height: 0;
+  }
+}

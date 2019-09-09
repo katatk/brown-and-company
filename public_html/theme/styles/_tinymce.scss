@@ -1,0 +1,42 @@
+/* tinymce universal formatting */
+#tinymce
+{
+	max-width: $CONTENT-WIDTH;
+	padding: 10px;
+	background: #fff;
+	color: $DARK-COLOUR;
+	font-size: 2rem;
+	text-align: left;
+
+	p,
+	ul,
+	ol
+	{
+			margin: 0 0 3rem;
+	}
+
+	p,
+	a,
+	li,
+	span
+	{
+		font-size: 2rem;
+	}
+
+	form
+	{
+		outline: 1px dotted $DARK-NEUTRAL-COLOUR;
+	}
+
+	a
+	{
+		border-bottom: 1px dotted $DARK-NEUTRAL-COLOUR;
+		text-decoration: none;
+	}
+
+	td
+	{
+		font-family: inherit;
+		font-size: inherit;
+	}
+}

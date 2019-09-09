@@ -1,0 +1,52 @@
+// getting fonts here means they are picked up by the editor in the admin panel
+// they are also set in the <head> of the site template to reduce content flash
+@import "https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600&display=swap";
+
+// comment out stylesheets which are not used in the site for lighter css
+@import "variables";
+@import "functions";
+@import "global";
+@import "forms";
+@import "jquery-ui";
+@import "lightbox";
+
+@import "main";
+
+// kat's added styles
+@import "bootstrap-grid/grid";
+@import "bootstrap-nav/navbar";
+@import "fontello";
+@import "navigation";
+
+//noinspection CssInvalidFunction
+@if has-slideshow() {
+  @import "slideshow";
+}
+
+//noinspection CssInvalidFunction
+@if has-blog() {
+  @import "blog";
+}
+
+// @import "galleries";
+
+//noinspection CssInvalidFunction
+@if has-cart() {
+  @import "hover-cart";
+  @import "cart";
+}
+
+//noinspection CssInvalidFunction
+@if has-users() {
+  @import "user";
+}
+
+//noinspection CssInvalidFunction
+@if has-testimonials() {
+  @import "testimonials";
+}
+
+@import "tinymce";
+
+// @import "products";
+@import "native";

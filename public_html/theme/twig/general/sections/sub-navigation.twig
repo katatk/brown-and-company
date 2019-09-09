@@ -1,0 +1,36 @@
+{% for menuItem in menuItems %}
+
+  {% set classes = ["dropdown-item"] %}
+  {% set children = [] %}
+
+  {% if currentDepth < maxDepth %}
+    {% set children = menuItem.getChildMenuItems() %}
+  {% endif %}
+
+  {% if menuItem.isHomepage() %}
+    {% set classes = classes | merge(["home"]) %}
+  {% endif %}
+
+  {% if menuItem.isMenuSelected(currentMenuItem) %}
+    {% set classes = classes | merge(["active"]) %}
+  {% endif %}
+
+  {% if children | length %}
+    {% set classes = classes | merge(["dropdown"]) %}
+  {% endif %}
+
+  <a href="{{ menuItem.getMenuPath() }}" {% if menuItem.isOpenedInNewWindow() %} target='_blank' {% endif %} class="dropdown-item">{{ menuItem.getMenuLabel()|raw }}</a>
+  {% if children | length > 0 %}
+    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+      {% include "general/sections/sub-navigation.twig" with {
+        "menuItems" : children,
+        "currentDepth" : currentDepth + 1,
+        "maxDepth" : maxDepth,
+        "currentMenuItem" : currentMenuItem
+      }
+      only %}
+
+    </div>
+  {% endif %}
+{% endfor %}

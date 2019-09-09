@@ -1,0 +1,45 @@
+{% for navItem in navItems %}
+
+  {% set classes = ["nav-item"] %}
+  {% set children = [] %}
+
+  {% if currentDepth < maxDepth %}
+    {% set children = navItem.getChildNavItems() %}
+  {% endif %}
+
+  {% if navItem.isHomepage() %}
+    {% set classes = classes | merge(["home"]) %}
+  {% endif %}
+
+  {% if isHomepage %}
+  {% endif %}
+
+  {% if navItem.isNavSelected(currentNavItem) %}
+    {% set classes = classes | merge(["active"]) %}
+  {% endif %}
+
+  {% if children | length %}
+    {% set classes = classes | merge(["dropdown"]) %}
+  {% endif %}
+
+
+  <li class="{{ classes|join(" ") }}">
+    <a href="{{ navItem.getNavPath() }}{% if isHomepage and (navItem.getNavLabel() == "Home") %}#{% endif %}" {% if navItem.isOpenedInNewWindow() %} target='_blank' {% endif %} class="nav-link">{{ navItem.getNavLabel()|raw }}
+      {% if children | length > 0 %}
+        <a href="#" class="dropdown-toggle">
+          <img src="/theme/images/angle-down.svg" class="angle-down">
+        </a>
+        <div class="dropdown-menu">
+          {% include "general/sections/sub-navigation.twig" with {
+            "navItems" : children,
+            "currentDepth" : currentDepth + 1,
+            "maxDepth" : maxDepth,
+            "currentNavItem" : currentNavItem
+          }
+          only %}
+        </div>
+      {% endif %}
+    </a>
+  </li>
+
+{% endfor %}

@@ -1,0 +1,569 @@
+// .topbar
+// {
+//   a,
+//   p,
+//   span
+//   {
+//     line-height: 1;
+//     font-weight: 500;
+//   }
+//
+//   .phone
+//   {
+//     font-size: 1.8rem;
+//
+//     a:first-child
+//     {
+//       font-weight: 600;
+//     }
+//
+//     .icon-phone
+//     {
+//       font-size: 1.5rem;
+//     }
+//   }
+//
+//   .button
+//   {
+//     padding: 1.8rem 2rem;
+//   }
+// }
+
+// link padding (to calculate underline size hover/active)
+$horizontal-padding: 1.5rem;
+$db-horizontal-padding: $horizontal-padding * 2;
+
+// a larger breakpoint for nav menu to adjust padding/margin
+$nav-large: 1680px;
+
+// for adding the angle after the logo
+$sm-triangle: 83.67px;
+$lg-triangle: 113px;
+
+// .topbar {
+//   display: none;
+//
+//   @include above($NAV-BREAKPOINT) {
+//     height: 25px;
+//     z-index: 2;
+//     width: 100%;
+//     background-color: transparent;
+//     display: block;
+//     position: absolute;
+//     top: 0;
+//     left: 0;
+//   }
+// }
+
+header {
+  .d-custom-none {
+    font-size: 2rem;
+
+    @include above($SM-BREAKPOINT) {
+      font-size: inherit;
+    }
+  }
+
+  @include above($NAV-BREAKPOINT) {
+    margin-top: 25px;
+    position: absolute;
+    z-index: 1;
+  }
+
+
+  .phone {
+    font-size: 1.5rem;
+
+    @include above($NAV-BREAKPOINT) {
+      font-size: 1.3rem;
+    }
+
+
+    @include above($LAPTOP-BREAKPOINT) {
+      font-size: 1.5rem;
+    }
+  }
+
+  .button {
+    font-size: 1.5rem;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1.5rem;
+    margin-bottom: 3rem;
+    font-weight: 500;
+    align-self: center;
+    justify-content: center;
+    width: auto;
+
+    @include above($NAV-BREAKPOINT) {
+      margin-left: 2rem;
+      margin-top: 0;
+      margin-bottom: 0;
+      font-size: 1.3rem;
+    }
+
+
+    @include above($LAPTOP-BREAKPOINT) {
+      font-size: 1.5rem;
+    }
+
+
+    @include above(1800) {
+      margin-left: 4rem;
+    }
+  }
+}
+
+nav[class*="navbar-expand-"] {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+
+  @include above($NAV-BREAKPOINT) {
+    background: linear-gradient(to right, $PRIMARY-HIGHLIGHT 100px, rgba(0, 0, 0, 0.4) 100px);
+    width: calc(100% - 25px);
+  }
+
+
+  & > .container {
+    position: relative;
+    height: 100%;
+    max-width: 100%;
+
+    @include above($NAV-BREAKPOINT) {
+      align-items: stretch;
+      height: 100%;
+      margin-right: unset;
+      align-items: center;
+      margin-left: 20px;
+      padding-right: 25px;
+    }
+
+
+    > .d-flex {
+      width: 100%;
+      background: #000;
+      position: relative;
+
+      @include above($NAV-BREAKPOINT) {
+        background-color: $PRIMARY-HIGHLIGHT;
+        width: auto;
+      }
+
+
+      &::before {
+        @include above($NAV-BREAKPOINT) {
+          content: '';
+          background-color: transparent;
+          position: absolute;
+          width: 0;
+          height: 0;
+          right: -#{$sm-triangle};
+          bottom: 0;
+          border-left: $sm-triangle solid transparent;
+          border-right: $sm-triangle solid transparent;
+          border-top: $sm-triangle solid transparent;
+          border-bottom: $sm-triangle solid $PRIMARY-HIGHLIGHT;
+          z-index: 0;
+        }
+
+
+        @include above(1600) {
+          right: -#{$lg-triangle};
+          border-left: $lg-triangle solid transparent;
+          border-right: $lg-triangle solid transparent;
+          border-top: $lg-triangle solid transparent;
+          border-bottom: $lg-triangle solid $PRIMARY-HIGHLIGHT;
+        }
+      }
+    }
+  }
+
+  // the ul tag
+  .navbar-nav {
+    margin-top: 0;
+    width: 100%;
+    padding-top: 1.5rem;
+
+    @include above($NAV-BREAKPOINT) {
+      padding-top: 0;
+      height: 100%;
+      justify-content: center;
+      margin-left: $sm-triangle;
+      height: 83.67px;
+    }
+
+
+    @include above($NAV-BREAKPOINT) {
+      margin-left: $lg-triangle;
+    }
+
+
+    @include above(1600) {
+      height: 113px;
+    }
+
+
+    // the li tag
+    .nav-item {
+      padding-left: 3rem;
+
+      @include above($NAV-BREAKPOINT) {
+        padding-left: 0;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        height: 100%;
+      }
+
+
+      // the a tag
+      .nav-link {
+        z-index: 1;
+        text-decoration: none;
+        line-height: 1;
+        font-weight: 400;
+        color: #fff;
+        font-family: $HEADING-FONT;
+        text-transform: uppercase;
+        text-align: left;
+        font-size: 1.5rem;
+        padding: 1.5rem 2.5rem;
+        display: inline-block;
+        text-align: left;
+        width: 100%;
+        transition: none;
+
+        @include above($NAV-BREAKPOINT) {
+          z-index: 0;
+          display: inline;
+          height: 100%;
+          display: flex;
+          align-items: center;
+          text-align: center;
+          position: relative;
+          padding: 0 $horizontal-padding;
+          font-size: 1.3rem;
+
+          @include above($LAPTOP-BREAKPOINT) {
+            font-size: 1.5rem;
+          }
+
+
+          @include above($nav-large) {
+            padding: 0 2rem;
+          }
+
+
+          &::before {
+            content: '';
+            height: 2px;
+            width: 100%;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            transform: scaleX(0);
+            transition: all 0.3s ease-in-out 0s;
+            display: inline-block;
+            background-color: $PRIMARY-HIGHLIGHT;
+          }
+
+          &:active,
+          &:hover {
+            &::before {
+              transform: scaleX(1);
+            }
+          }
+        }
+      }
+
+      &.active .nav-link {
+        @include above($NAV-BREAKPOINT) {
+          &::before {
+            content: '';
+            height: 2px;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            min-width: 100%;
+            -webkit-transform: scaleX(1);
+            transform: scaleX(1);
+            display: inline-block;
+            background-color: $PRIMARY-HIGHLIGHT;
+          }
+        }
+      }
+
+      // dropdown nav
+      &.dropdown {
+        position: relative;
+
+        @include above($NAV-BREAKPOINT) {
+          .nav-link::before {
+            width: calc(100% - #{$horizontal-padding} + 1.7rem + 4px);
+          }
+        }
+
+
+        @include above($nav-large) {
+          .nav-link::before {
+            width: calc(100% - 2rem + 1.7rem + 4px);
+          }
+        }
+
+
+        .dropdown-toggle {
+          margin-left: -28px;
+          font-size: 2.5rem;
+          position: relative;
+          z-index: 2;
+
+          &:hover {
+            color: $PRIMARY-HIGHLIGHT;
+          }
+
+          @include above($NAV-BREAKPOINT) {
+            z-index: unset;
+          }
+
+
+          i {
+            line-height: 1.55rem;
+            padding: 0 1rem;
+            position: relative;
+            top: 1px;
+          }
+
+          @include above($NAV-BREAKPOINT) {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100%;
+            position: static;
+            margin-left: -13px;
+            padding: 0;
+            font-size: 1em;
+
+            i {
+              padding-right: 0;
+            }
+          }
+        }
+
+        @include above($NAV-BREAKPOINT) {
+          // desktop show sub menu on hover
+          &:hover > .dropdown-menu {
+            .dropdown-item {
+              display: block;
+              visibility: visible;
+              opacity: 1;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.dropdown-menu {
+  display: block;
+  min-width: 100%;
+  left: 0;
+  top: 100%;
+  border: none;
+  margin: 0;
+  padding: 0;
+  background-color: $PRIMARY-HIGHLIGHT;
+
+  &.show {
+    .dropdown-item {
+      display: block;
+      visibility: visible;
+    }
+  }
+
+  .dropdown-item {
+    display: none;
+    visibility: hidden;
+    transition: background-color ease .5s;
+    text-transform: uppercase;
+    line-height: 1;
+    font-weight: 300;
+    color: #fff;
+    font-family: $HEADING-FONT;
+    text-align: left;
+    font-size: 1.5rem;
+    padding: 2.5rem;
+    text-align: center;
+    white-space: nowrap;
+
+    &, &:hover {
+      color: #FFF;
+    }
+
+    @include above($NAV-BREAKPOINT) {
+      padding: 2.5rem;
+
+      &:hover {
+        background-color: $PRIMARY-HOVER;
+      }
+    }
+  }
+
+  @include above($NAV-BREAKPOINT) {
+    &:hover {
+      .dropdown-item {
+        display: block;
+        visibility: visible;
+      }
+    }
+  }
+}
+
+// logo styles
+.logo-container {
+  margin: 3rem 20px 3rem 20px;
+  z-index: 2;
+
+  @include above(1600) {
+    margin: 4rem 0;
+  }
+
+
+  // the a class
+  .navbar-brand {
+    display: flex;
+
+    // the img element
+    .logo {
+      height: auto;
+      display: inline-block;
+      width: 100%;
+
+      @include below(1600) {
+        max-width: 305px;
+      }
+    }
+  }
+}
+
+.navbar-collapse {
+  background-color: rgba(0, 0, 0, 0.9);
+  opacity: 0;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+
+  @include above($NAV-BREAKPOINT) {
+    padding: 0;
+    position: static;
+    width: auto;
+    background-color: transparent;
+  }
+
+
+  &:not(.show) {
+    @include above($NAV-BREAKPOINT) {
+      opacity: 1;
+    }
+  }
+
+  &.show {
+    transition: opacity 0.5s ease-in-out 0s;
+    opacity: 1;
+    z-index: 3;
+  }
+}
+
+// mobile toggler
+.navbar-toggler {
+  margin-right: 20px;
+  border: none;
+  padding: 0.5rem;
+  cursor: pointer;
+  left: 0.5rem;
+
+  &:focus {
+    outline: none;
+  }
+
+  .navbar-toggler-icon {
+    background-image: none;
+    width: 26px;
+    height: 22px;
+    position: relative;
+    cursor: pointer;
+
+    span {
+      display: block;
+      position: absolute;
+      height: 3px;
+      width: 100%;
+      background: #fff;
+      border-radius: 9px;
+      opacity: 1;
+      left: 0;
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+      -webkit-transition: 0.25s ease-in-out;
+      transition: 0.25s ease-in-out;
+
+      &:nth-child(1) {
+        top: 0;
+        -webkit-transform-origin: left center;
+        transform-origin: left center;
+      }
+
+      &:nth-child(2) {
+        top: 8px;
+        -webkit-transform-origin: left center;
+        transform-origin: left center;
+      }
+
+      &:nth-child(3) {
+        top: 16px;
+        -webkit-transform-origin: left center;
+        transform-origin: left center;
+      }
+    }
+  }
+
+  /* open styles */
+  .navbar-toggler-icon.open span {
+    &:nth-child(1) {
+      -webkit-transform: rotate(45deg);
+      transform: rotate(45deg);
+      top: 0;
+      left: 0;
+    }
+
+    &:nth-child(2) {
+      width: 0;
+      opacity: 0;
+    }
+
+    &:nth-child(3) {
+      -webkit-transform: rotate(-45deg);
+      transform: rotate(-45deg);
+      top: 18px;
+      left: 0;
+    }
+  }
+
+  @include above($NAV-BREAKPOINT) {
+    margin-top: 0;
+  }
+}
+
+.d-custom-none {
+  @include above($NAV-BREAKPOINT) {
+    display: none !important;
+  }
+}
+
+.d-custom-flex {
+  @include above($NAV-BREAKPOINT) {
+    display: flex;
+  }
+}

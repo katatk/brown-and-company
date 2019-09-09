@@ -1,0 +1,30 @@
+{% extends 'template.twig' %}
+
+{% block content %}
+  <div class="container main-content">
+    <h1>{{ page.contentTitle }}</h1>
+    <div class="row first-row">
+      <div class="col-12 col-lg-6 mb-12 mb-lg-0 d-md-flex flex-column">
+
+        {{ page.content|raw }}
+
+        <p>
+          Phone:
+          <a href="tel:{{ config.getPhoneDigits() }}">{{ config.phone }}</a><br/>
+          Email:
+          <a href="mailto:{{config.email }}">{{ config.email }}</a>
+        </p>
+
+        <h3>Opening Hours</h3>
+        <p class="mb-0">Monday - Friday: 07:30 - 17:30<br>
+        Saturday - Sunday: Closed</p>
+      </div>
+
+      <div class="col-12 col-lg-6">
+          <h1>{{ contactForm.name }}</h1>
+        {{ contactForm.outputForm()|raw }}
+      </div>
+    </div>
+      </div>
+
+{% endblock %}

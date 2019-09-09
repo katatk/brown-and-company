@@ -1,0 +1,13 @@
+<h1>Testimonials</h1>
+<div class="carousel mb-4">
+  <div class="carousel-inner">
+    {% for testimonial in controller.callStatic('Testimonial', 'loadAllActive') %}
+      <div class="carousel-item">
+        <p class="testimony">
+          {{ testimonial.testimony|nl2br }}
+        </p>
+      <p class="customer"> {{ testimonial.witness }} </p>
+      </div>
+    {% endfor %}
+  </div>
+</div>

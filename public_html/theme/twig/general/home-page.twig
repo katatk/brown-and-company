@@ -1,0 +1,93 @@
+{% extends 'template.twig' %}
+
+{% block content %}
+
+  <div class="container-fluid bg-img first px-0" style="background: url('{{ page.image_1.getFullLink()|raw }}') no-repeat bottom right; background-size: 50% auto;">
+    <div class="container pt-20">
+      <h1>{{ page.contentTitle }}</h1>
+      <div class="row">
+        <div class="col-12 col-lg-6 bg-white checklist pb-14 pr-6">
+          {{ page.content|raw }}
+        </div>
+        <div class="col-12 col-lg-6 ">
+          <div class="float-right d-none d-lg-block">
+            <img src='{{ page.image_1.getFullLink()|raw }}' alt="Matipo Garage {{ page.title }}"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid px-0 d-flex d-lg-none">
+    <img src='{{ page.image_1.getFullLink()|raw }}' alt="Matipo Garage {{ page.title }}">
+  </div>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 col-lg-6 col-xl-3 blue-cols">
+        <a href="{{ page.blue_1_link }}">
+          <div class="inner">
+            <h2>{{ page.blue_1_title }}</h2>
+            <p>{{ page.blue_1_text|raw }}</p>
+          </div>
+          <i class="icon icon-right-small"></i>
+        </a>
+      </div>
+      <div class="col-12 col-lg-6 col-xl-3 blue-cols">
+        <a href="{{ page.blue_2_link }}">
+          <div class="inner">
+            <h2>{{ page.blue_2_title }}</h2>
+            <p>{{ page.blue_2_text|raw }}</p>
+          </div>
+          <i class="icon icon-right-small"></i>
+        </a>
+      </div>
+      <div class="col-12 col-lg-6 col-xl-3 blue-cols">
+        <a href="{{ page.blue_3_link }}">
+          <div class="inner">
+            <h2>{{ page.blue_3_title }}</h2>
+            <p>{{ page.blue_3_text|raw }}</p>
+          </div>
+          <i class="icon icon-right-small"></i>
+        </a>
+      </div>
+      <div class="col-12 col-lg-6 col-xl-3 blue-cols">
+        <a href="{{ page.blue_4_link }}">
+          <div class="inner">
+            <h2>{{ page.blue_4_title }}</h2>
+            <p>{{ page.blue_4_text|raw }}</p>
+          </div>
+          <i class="icon icon-right-small"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid px-0 bg-img" style="background: url('{{ page.image_2.getFullLink()|raw }}') no-repeat top left; background-size: 50% auto;">
+    <div class="container">
+      <div class="row">
+
+        <div class="col-12 col-lg-6 pl-0  d-none d-lg-flex"></div>
+        <div class="col-12 col-lg-6 pl-lg-10 py-10 bg-white">
+          <h1>{{ bookingForm.name }}</h1>
+          {{ bookingForm.outputForm()|raw }}
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid px-0 d-flex d-lg-none">
+    <img src='{{ page.image_3.getFullLink()|raw }}' alt="Matipo Garage {{ page.title }}">
+  </div>
+
+  <div class="container-fluid px-0 bg-img testimonials-home" style="background: url('{{ page.image_3.getFullLink()|raw }}') no-repeat top right; background-size: 50% auto;">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-lg-6 pb-10 pb-xl-0 pt-10 pr-lg-10 bg-white">
+          {% include 'general/sections/testimonial.twig' %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

@@ -1,0 +1,122 @@
+// testimonials on testimonials page
+.Testimonials
+{
+
+  .customer
+  {
+    font-style: italic;
+    font-size: 1.7rem;
+  }
+
+  .icon-quote
+  {
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg) scaleX(1.2);
+    font-size: 10rem;
+    color: #f0f0f0;
+    position: absolute;
+    z-index: -1;
+    top: 1rem;
+    left: 3rem;
+  }
+}
+
+
+// testimonials above footer every page
+
+// styling for container-fluid testimonials wrapper
+
+.bg-testimonials
+{
+  background-image: url("../theme/images/testimonials-bg.jpg");
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 640px;
+
+  > .container
+  {
+    padding: 0 4rem;
+  }
+
+
+  h3
+  {
+    font-size: 3rem;
+    font-weight: 400;
+  }
+
+  p.testimony
+  {
+    font-size: 1.8rem;
+    line-height: 1.7;
+  }
+
+  .icon-quote
+  {
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg) scaleX(1.2);
+    font-size: 4rem;
+    margin-bottom: 2rem;
+
+    &:before
+    {
+      margin-top: 1.5rem;
+    }
+  }
+
+  // carousel arrows
+  .slide-arrows
+  {
+    visibility: hidden;
+
+    @include above($MD-BREAKPOINT) {
+      visibility: visible;
+      display: inline-block;
+      font-size: 5rem;
+      position: absolute;
+      top: 0;
+      cursor: pointer;
+    }
+
+    &.icon-angle-left {
+      left: -8rem;
+    }
+
+    &.icon-angle-right {
+      right: -8rem;
+    }
+  }
+
+  .customer {
+    font-style: italic;
+    font-size: 1.7rem;
+  }
+
+  // .indicators
+  // {
+  //   bottom: 3rem;
+  //    li
+  // 	 {
+  //     height: 12px;
+  //     width: 12px;
+  //     border-radius: 50%;
+  //     margin-left: 0.5rem;
+  //     margin-right: 0.5rem;
+  //   }
+  // }
+
+}

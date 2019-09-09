@@ -1,0 +1,8 @@
+*.png
+*.jpg
+*.ico
+*.zip
+*.gif
+*.svg
+
+.remote-sync.json

@@ -1,0 +1,233 @@
+// override polyfill styles to display date elements in site style
+// these may need to be adjusted to match those in the form-fields SASS include on a site by site basis
+.field dateinput-picker + input {
+  color: inherit !important;
+  caret-color: initial !important;
+  background-image: none !important;
+}
+
+// default form styling
+// apply custom-form class to forms that shouldn't have default styles
+// - note .button styling at top of global file
+
+form:not(.custom-form) {
+  .group {
+    display: block;
+    border: 0;
+    margin: 0;
+    padding: 10px;
+    background: rgba($PRIMARY-HIGHLIGHT, 0.05);
+
+    legend {
+      // Enables wrapping in IE
+      display: table;
+      float: left;
+      margin: 0 0 0.3em;
+      padding: 0;
+    }
+
+    .selectable {
+      clear: left;
+      display: block;
+    }
+
+    .error {
+      display: inline-block;
+    }
+  }
+
+  .field-wrapper {
+    @include below($LG-BREAKPOINT) {
+      max-width: 500px;
+    }
+
+
+    &:not(:last-child) {
+      margin-bottom: 1.5rem;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .label {
+    display: block;
+    margin-bottom: 0.3em;
+  }
+
+  .field {
+    display: block;
+  }
+
+  span.error {
+    display: block;
+    margin-top: 10px;
+    color: $WARNING-COLOUR;
+  }
+
+  @include form-fields {
+    box-sizing: border-box;
+    display: inline-block;
+    border: none;
+    padding: 1.5rem;
+    width: 100%;
+    background: #f0f0f0;
+    font-family: inherit;
+    font-size: inherit;
+    color: $DARK-COLOUR;
+  }
+
+
+  // styling for placeholder form values, can't be grouped into one selector for some unknown reason...
+  ::-webkit-input-placeholder {
+    color: $DARK-COLOUR;
+  }
+
+  ::-moz-placeholder {
+    color: $DARK-COLOUR;
+  }
+
+  :-ms-input-placeholder {
+    color: $DARK-COLOUR;
+  }
+
+  :-moz-placeholder {
+    color: $DARK-COLOUR;
+  }
+
+  select {
+    padding-right: 30px;
+    appearance: none;
+  }
+
+  .select-wrapper .field {
+    position: relative;
+
+    &:after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      right: 10px;
+      border-width: 10px 8px 0;
+      border-style: solid;
+      border-color: $NEUTRAL-COLOUR transparent transparent;
+      margin-top: -5px;
+      pointer-events: none;
+    }
+  }
+
+  textarea {
+    height: 180px;
+  }
+
+  // input[type=text],
+  // input[type=tel],
+  // input[type=email],
+  // textarea
+  // {
+  // 	border-bottom: 2px solid $PRIMARY-HIGHLIGHT;
+  // }
+
+  input[type=checkbox],
+  input[type=radio] {
+    box-sizing: border-box;
+    vertical-align: text-bottom;
+    border: 2px solid $NEUTRAL-COLOUR;
+    height: 1.2em;
+    width: 1.2em;
+    appearance: none;
+
+    &:checked {
+      background: $PRIMARY-HIGHLIGHT;
+    }
+  }
+
+  input[type=radio] {
+    border-radius: 50%;
+  }
+
+  .file-picker {
+    overflow: hidden;
+
+    input {
+      position: absolute;
+      left: 0;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    .field {
+      position: relative;
+    }
+
+    .upload-button {
+      display: inline-block;
+      position: relative;
+      max-width: 200px;
+      padding-right: 35px;
+      text-align: center;
+      cursor: pointer;
+
+      @include hover {
+        &:after {
+          top: -10px;
+        }
+      }
+
+
+      &:after {
+        @extend %absolute-pseudo-block;
+
+        top: 0;
+        right: 15px;
+        bottom: 0;
+        height: 20px;
+        margin: auto;
+        width: 18px;
+        background: url("/theme/images/icon_upload.png") center center no-repeat;
+        transition: all 0.2s;
+      }
+    }
+
+    .uploaded {
+      display: inline-block;
+      margin-left: 20px;
+    }
+  }
+}
+
+// form on the homepage
+
+.Home {
+  #form-2 {
+    .fields {
+      @include above($LG-BREAKPOINT) {
+        .field-wrapper {
+          float: left;
+          display: inline-block;
+          width: 50%;
+
+          &:nth-child(odd) {
+            margin-right: 1.5rem;
+            width: calc(50% - 1.5rem);
+          }
+
+          &:nth-last-child(2) {
+            width: 100%;
+            float: none;
+            margin-right: 0;
+          }
+        }
+
+        .field-wrapper:only-child, .security-wrapper {
+          clear: both;
+        }
+
+        textarea {
+          height: 135px;
+        }
+      }
+    }
+  }
+}

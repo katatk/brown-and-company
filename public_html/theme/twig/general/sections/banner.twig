@@ -1,0 +1,80 @@
+{% set classes = ["container-fluid", "banner"] %}
+
+{% if page.isHomepage %}
+  {% set classes = classes | merge(["home-banner"]) %}
+{% endif %}
+
+<div class="{{ classes|join(" ") }}" style="{% if page.banner.getFullLink() != null %}
+background-image: url('{{ page.banner.getFullLink()|raw }}') {% else %} background-image: url('/theme/images/banner.jpg'){% endif %}">
+  <div class="container px-0 h-100 d-flex align-items-center justify-content-center">
+    {% if page.isHomepage %}
+      <a class="logo-wrapper d-flex order-2 order-lg-1" href="/BMW-Mini/">
+        <div class="mb-4 d-flex flex-lg-column">
+        <div class="mr-4 ">
+        <img src="/theme/images/bmw.png" alt="BMW Servicing">
+        </div>
+        <div>
+        <img src="/theme/images/mini.png" alt="Mini Servicing">
+        </div>
+        </div>
+        <i class="icon icon-right-small"></i>
+          </a>
+          <a class="logo-wrapper d-flex" href="/Servicing/">
+        <div class="mb-4 d-flex d-lg-none">
+          <div class="mr-4">
+            <img src="/theme/images/toyota.png" alt="Toyota Servicing">
+          </div>
+          <div class="">
+            <img src="/theme/images/mazda.png" alt="Nissan Servicing">
+          </div>
+        </div>
+        <div class="mb-4 d-flex d-lg-none">
+          <div class="mr-4">
+            <img src="/theme/images/nissan.png" alt="Mazda Servicing">
+          </div>
+          <div class="">
+            <img src="/theme/images/honda.png" alt="Honda Servicing">
+          </div>
+        </div>
+      </a>
+
+      <div class="text-wrapper text-center order-1 order-lg-2 mx-6">
+        <h2>{{ page.banner_title }}</h2>
+        {% if page.banner_text != '' %}
+          <div class="text-white d-none d-lg-block px-2">{{ page.banner_text|raw }}</div>
+        {% endif %}
+        {% if page.banner_button != '' %}
+          <a class="button d-none d-lg-inline-block form-button">{{ page.banner_button }}</a>
+        {% endif %}
+      </div>
+      <a class="logo-wrapper d-none d-lg-flex order-3" href="/Servicing/">
+        <div class="mb-4">
+          <div class="mr-4">
+            <img src="/theme/images/toyota.png" alt="Toyota Servicing">
+          </div>
+          <div class="">
+            <img src="/theme/images/mazda.png" alt="Nissan Servicing">
+          </div>
+        </div>
+        <div class="mb-4">
+          <div class="mr-4">
+            <img src="/theme/images/nissan.png" alt="Mazda Servicing">
+          </div>
+          <div class="">
+            <img src="/theme/images/honda.png" alt="Honda Servicing">
+          </div>
+
+        </div>
+          <i class="icon icon-right-small"></i>
+      </a>
+    {% elseif page.isHomepage == false %}
+      {% if page.title != '' %}
+        <h2>{{ page.title }}</h2>
+      {% else %}
+        <h2>{{ page.title|raw }}</h2>
+      {% endif %}
+    {% endif %}
+
+    <img src="/theme/images/mta.png" alt="MTA ASSURED" class="mta">
+  </div>
+</div>

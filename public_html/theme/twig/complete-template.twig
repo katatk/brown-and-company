@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-NZ" class="{{ page.module|replace({' ': "-"}) }}">
+
+  <head>
+    {% block meta_data %}
+      <title>{{ page.title }}</title>
+      <meta name="description" content="{{ page.description }}"/>
+      <meta name="keywords" content="{{ page.keywords }}"/>
+    {% endblock %}
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    {% if originalPage.isDuplicate %}
+      <link rel='canonical' href='{{ constant(' protocol="PROTOCOL" ') ~ constant(' site_root="SITE_ROOT" ') ~ originalPage.original.path }}'/>
+    {% endif %}
+    <!--suppress HtmlUnknownTarget -->
+    <link rel="shortcut icon" href="/favicon.ico"/>
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32"/>
+    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16"/>
+
+    {% block canonical_link %}{% endblock %}
+    {# get fonts early to reduce content flash. Still need set in _setup.css as well #}
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600&display=swap" rel="stylesheet">
+    <script type="text/javascript">
+      // add this immediately so elements which are initially hidden based on presence of javascript don't 'flash'
+      (function() {
+        let node = document.documentElement;
+        node.setAttribute('class', node.getAttribute('class') + ' javascript')
+      })()
+    </script>
+    {% block styles %}
+      {# Load stylesheets first for speed. Load all plugin stylesheets before local stylesheet to allow overrides with minimum declarations #}
+      <link rel="stylesheet" type="text/css" href="/bower_components/jquery-ui/themes/ui-lightness/jquery-ui.min.css"/>
+      <link rel="stylesheet" type="text/css" href="/bower_components/slick-carousel/slick/slick.css"/>
+      <link rel="stylesheet" type="text/css" href="/bower_components/lightGallery/dist/css/lightgallery.min.css"/>
+      <link rel="stylesheet" type="text/css" href="/bower_components/featherlight/release/featherlight.min.css"/>
+      <!--suppress HtmlUnknownTarget -->
+      <link rel="stylesheet" type="text/css" href="/theme/style.css"/>
+    {% endblock %}
+    {% block scripts %}
+      {% do
+        script.add("/bower_components/jquery/dist/jquery.min.js") %}
+      {% do script.add("/bower_components/jquery-ui/jquery-ui.min.js") %}
+      {% do script.add("/bower_components/js-cookie/src/js.cookie.js") %}
+      {% do script.add("/bower_components/jquery-validate/dist/jquery.validate.min.js")
+	%}
+      {% do script.add("/bower_components/jquery-validate/dist/additional-methods.min.js") %}
+      {% do
+        script.add("/bower_components/lightGallery/dist/js/lightgallery.min.js") %}
+      {% do
+        script.add("/bower_components/featherlight/release/featherlight.min.js") %}
+      {% do script.add("/bower_components/slick-carousel/slick/slick.min.js") %}
+      {% do script.add("/bower_components/better-dom/dist/better-dom.min.js") %}
+      {% do script.add("/bower_components/better-dateinput-polyfill/dist/better-dateinput-polyfill.min.js")
+	%}
+      {% do
+        script.add("/bower_components/hideShowPassword/hideShowPassword.min.js") %}
+      {% if 'HoverCart' | isEnabled %}
+        {% do script.add("/theme/scripts/hover-cart.js") %}
+      {% endif %}
+      {% do
+        script.add("/theme/scripts/script.js") %}
+      {% if 'Payments\\Stripe' | gatewayEnabled
+ %}
+        {% do
+          script.add("/theme/scripts/stripe.js") %}
+        <script src="https://checkout.stripe.com/checkout.js"></script>
+      {% endif %}
+      {% if constant('GOOGLE_MAPS_API') != "" %}
+        {% set scriptUrl = 'https://maps.googleapis.com/maps/api/js?key=' ~ constant('GOOGLE_MAPS_API') %}
+        {% if 'Shipping' | isEnabled %}
+          {# Note, this must be loaded before the Google Maps crap gets loaded,
+	so we load it separately from everything else #}
+          <script type='text/javascript' src='/theme/scripts/auto-address.js'></script>
+          {% set scriptUrl = scriptUrl ~ '&libraries=places&callback=initAutocomplete' %}
+        {% endif %}
+
+        <script type="text/javascript" src="{{ scriptUrl }}"></script>
+      {% endif %}
+      {% if constant('ANALYTICS_IDENTIFIER') != '' %}
+        {% include 'general/sections/google-analytics.twig' %}
+      {% endif %}
+      {% if constant('RECAPTCHA_SITE_KEY') != '' %}
+        {% include 'general/sections/recaptcha.twig' %}
+      {% endif %}
+    {% endblock %}
+  </head>
+
+  <body>
+    <header role="banner">
+      <nav class="navbar navbar-expand-lg">
+        <div class="container d-flex align-items-center align-items-stretch">
+          <div class="d-flex align-items-center justify-content-between">
+          <div class="logo-container d-flex">
+            <a class="navbar-brand" href="{{ homePath }}">
+              <img class="logo" src="/theme/images/logo.png" alt="{{ constant('SITE_FROM_NAME') }}"/>
+            </a>
+          </div>
+          <a href="tel:{{ config.getPhoneDigits() }}" class="d-block text-white d-lg-none mx-4">
+            <i class="icon icon-phone mr-2"></i>
+            <span class="d-none d-sm-inline-block">{{ config.phoneOne }}</span>
+          </a>
+
+          {#{% include 'general/sections/search-form.twig' %}#}
+          <button class="navbar-toggler" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon">
+              <span></span>
+              <span></span>
+              <span></span>
+            </span>
+          </button>
+          </div>
+          <div class="collapse navbar-collapse flex-column" id="navbarSupportedContent">
+            <ul class="navbar-nav">
+
+              {% include "general/sections/navigation.twig" with {
+                "navItems" : navItems,
+                "currentDepth" : 1,
+                "maxDepth" : 2,
+                "currentNavItem" : originalPage
+              }
+              only %}
+
+            <li class="nav-item">
+                <a href="tel:{{ config.getPhoneDigits() }}" class=" d-lg-none">
+                  <i class="icon icon-phone mr-2"></i>
+                  <span>{{ config.phoneOne }}</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <a href="tel:{{ config.getPhoneDigits() }}" class="d-none d-lg-flex align-items-center py-3 text-white phone">
+            <i class="icon icon-phone mr-2"></i>
+            <span>{{ config.phoneOne }}</span>
+          </a>
+
+        </div>
+      </nav>
+    </header>
+    <!-- end header -->
+    <main>
+
+      {% include 'general/sections/banner.twig' %}
+
+        {% block content_wrapper %}
+          {% block content %}
+          {% endblock %}
+        {% endblock %}
+
+    </main>
+
+    <!-- if contact page, show map -->
+    {% if (page.module == "Contact") and config.addressOne != '' %}
+        <div class="map">
+          {{ config.getMap()|raw }}
+        </div>
+    {% endif %}
+
+
+    <footer role="contentinfo">
+      <section class="site-footer">
+        <div class="container pt-16 pb-4 py-lg-20">
+          <div class="row">
+            <div class="col-12 order-3 order-lg-1 d-lg-flex col-lg-4 flex-column justify-content-start align-items-start mb-10 mb-lg-0 text-center text-lg-left">
+              <h4>{{ config.addressOneTitle }}</h4>
+              <p class="mb-lg-4">
+                {{ config.addressOne|nl2br }}<br>
+                Phone:
+                <a class="" href="mailto:{{ config.getPhoneDigits() }}">{{ config.phoneOne }}</a>
+                Email:
+                <a class="" href="mailto:{{ config.email }}">{{ config.email }}</a>
+              </p>
+
+            </div>
+            <div class="col-12 order-1 order-lg-2 d-flex col-lg-4 flex-column mb-10 mb-lg-0 justify-content-start align-items-center text-center">
+              <img src="/theme/images/logo.png" alt="{{ constant('SITE_FROM_NAME') }}" class="img-fluid mb-8 mb-lg-12">
+            </div>
+            <div class="col-12 order-4 order-lg-3 d-lg-flex col-lg-4 flex-column justify-content-start align-items-end text-center text-lg-right">
+              <h4>{{ config.addressTwoTitle }}</h4>
+              <p class="mb-lg-4">
+                {{ config.addressTwo|nl2br }}<br>
+                Phone:
+                <a class="" href="mailto:{{ config.getSecondaryPhoneDigits() }}">{{ config.phoneTwo }}</a>
+                Email:
+                <a class="" href="mailto:{{ config.email }}">{{ config.email }}</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="sub-footer">
+        <div class="container py-9">
+          <div class="row">
+            <div class="col-12 col-md-6 d-md-flex mb-1 mb-md-0 flex-column justify-content-center align-items-start text-center text-md-left">
+              <span>&copy; {{ constant('SITE_FROM_NAME') }} - All Rights Reserved</span>
+            </div>
+
+            <div class="col-12 col-md-6 d-md-flex  flex-column justify-content-center align-items-end text-center text-md-right">
+              <span>
+                <a href="https://www.activatedesign.co.nz/" target="_blank" {% if not page.isHomepage %} rel="nofollow" {% endif %}>Web Design by Activate</a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </footer>
+
+    {{ script.output()|raw }}
+
+  </body>
+
+</html>
