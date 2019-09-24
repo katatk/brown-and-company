@@ -9,80 +9,43 @@
     $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
 
     .d#{$infix}-none {
-      display: none;
+      display: none !important;
     }
 
     .d#{$infix}-inline {
-      display: inline;
+      display: inline !important;
     }
 
     .d#{$infix}-inline-block {
-      display: inline-block;
+      display: inline-block !important;
     }
 
     .d#{$infix}-block {
-      display: block;
+      display: block !important;
     }
 
-    // .d#{$infix}-table        { display: table; }
-    // .d#{$infix}-table-row    { display: table-row; }
-    // .d#{$infix}-table-cell   { display: table-cell; }
+    .d#{$infix}-table {
+      display: table !important;
+    }
+
+    .d#{$infix}-table-row {
+      display: table-row !important;
+    }
+
+    .d#{$infix}-table-cell {
+      display: table-cell !important;
+    }
+
     .d#{$infix}-flex {
-      display: -webkit-box;
-      display: -ms-flexbox;
-      display: flex;
+      display: -webkit-box !important;
+      display: -ms-flexbox !important;
+      display: flex !important;
     }
 
     .d#{$infix}-inline-flex {
-      display: -webkit-inline-box;
-      display: -ms-inline-flexbox;
-      display: inline-flex;
+      display: -webkit-inline-box !important;
+      display: -ms-inline-flexbox !important;
+      display: inline-flex !important;
     }
-  }
-}
-
-//
-// Utilities for toggling `display` in print
-//
-
-@media print {
-  .d-print-none {
-    display: none;
-  }
-
-  .d-print-inline {
-    display: inline;
-  }
-
-  .d-print-inline-block {
-    display: inline-block;
-  }
-
-  .d-print-block {
-    display: block;
-  }
-
-  .d-print-table {
-    display: table;
-  }
-
-  .d-print-table-row {
-    display: table-row;
-  }
-
-  .d-print-table-cell {
-    display: table-cell;
-  }
-
-  .d-print-flex {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-  }
-
-  .d-print-inline-flex {
-    display: -webkit-inline-box;
-    display: -ms-inline-flexbox;
-    display: inline-flex;
   }
 }

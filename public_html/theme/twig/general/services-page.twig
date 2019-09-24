@@ -1,0 +1,39 @@
+{% extends 'template.twig' %}
+
+{% block content %}
+  <div class="container main-content">
+    {% if page.contentTitle != '' %}
+      <h1>{{ page.contentTitle }}</h1>
+    {% endif %}
+    <div class="row">
+      <div class="col-12 mb-4">
+        {{ page.content|raw }}
+      </div>
+        </div>
+      <div class="row mb-8">
+        <div class="col-12 col-lg-6 mb-4 mb-lg-0">
+          {{ page.textOne|raw }}
+        </div>
+        <div class="col-12 col-lg-6">
+          {% if page.imageOne.tag() != null %}
+            <div class="float-right">
+              {{ page.imageOne.tag()|raw }}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 col-lg-6  order-2 order-lg-1">
+          {% if page.imageTwo.tag() != null %}
+            <div class="float-left">
+              {{ page.imageTwo.tag()|raw }}
+            </div>
+          {% endif %}
+        </div>
+        <div class="col-12 col-lg-6 mb-4 mb-lg-0 order-1 order-lg-2">
+          {{ page.textTwo|raw }}
+        </div>
+      </div>
+    </div>
+
+{% endblock %}

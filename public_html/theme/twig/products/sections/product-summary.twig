@@ -1,0 +1,22 @@
+<li>
+	<a class="image" href="{{ product.path }}">
+		{% if product.activeImages|length > 0 and product.activeImages[0].thumbnail != null %}
+			{{ product.activeImages[0].thumbnail.tag('', product.name)|raw }}
+		{% endif %}
+	</a>
+	<div class="summary">
+		<p class="name-wrapper">
+			<span class="name">{{ product.name }}</span>
+			<span class="price">{{ product.price|formatPrice }}</span>
+		</p>
+		<p>{{ product.summary|nl2br }}</p>
+	</div>
+	<div class="buttons">
+		{% if 'Cart'|isEnabled %}
+			<a class="button js-add-to-cart-link" href="/Cart/Action/Add/{{ controller.callStatic('Products\\Product', 'getClassLineItemGeneratorIdentifier') }}/{{ product.getLineItemGeneratorIdentifier() }}/1/" >
+				Add to cart
+			</a>
+		{% endif %}
+		<a class="button" href="{{ product.path }}">View Product</a>
+	</div>
+</li>

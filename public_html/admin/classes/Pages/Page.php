@@ -105,8 +105,12 @@
 		public $useSlideshow = false;
 		public $isRedirect = false;
 		public $showSubpageLinks = false;
-		public $banner = null;
-		public $bannerText = '';
+
+		// public $bannerImage = null;
+		// public $bannerTitle = '';
+		// public $bannerText = '';
+		// public $bannerButton = '';
+
 
 		/** @var Page $parent */
 		public $parent = null;
@@ -166,7 +170,10 @@
 			static::addProperty(new Property('isErrorPage','is_error_page','bool'));
 			static::addProperty(new Property('path'));
 			static::addProperty(new ImageProperty('image', 'auxilary_image', static::IMAGE_LOCATION, static::IMAGE_WIDTH, static::IMAGE_HEIGHT, static::IMAGE_RESIZE_TYPE));
-			static::addProperty(new ImageProperty('banner', 'banner', static::IMAGE_LOCATION, static::BANNER_WIDTH, static::BANNER_HEIGHT, static::IMAGE_RESIZE_TYPE));
+			// static::addProperty(new ImageProperty('bannerImage', 'banner', static::IMAGE_LOCATION, static::BANNER_WIDTH, static::BANNER_HEIGHT, static::IMAGE_RESIZE_TYPE));
+			// static::addProperty(new Property("bannerTitle", "banner_title", "string"));
+			// static::addProperty(new Property("bannerText", "banner_text", "html"));
+			// static::addProperty(new Property("bannerButton", "banner_button", "string"));
 			static::addProperty((new LinkFromMultipleProperty("children", Page::class, "parent"))->setAutoDelete(true));
 		}
 
@@ -214,10 +221,10 @@
 			//$this->addFormElement((new Text("contentTitle", 'Content Title'))->setClasses('inline-label half'), "Content");
 
 			parent::formElements();
-			if(PAGE_BANNER)
-			{
-				$this->addFormElement(new ImageElement('banner', 'Banner', $this->banner), "Content");
-			}
+			// if(PAGE_BANNER)
+			// {
+			// 	$this->addFormElement(new ImageElement('bannerImage', 'Banner', $this->bannerImage), "Content");
+			// }
 
 			$this->addFormElement(new Text("contentTitle", 'Content Title'), "Content");
 
@@ -237,10 +244,10 @@
 
 			if(PAGE_HAS_SLIDESHOW)
 			{
-				$this->addFormElement(new Checkbox("useSlideshow", 'Display slideshow'), "Slideshow");
-
-				/** @var ImageProperty $imageProperty */
-				$this->addFormElement(new GridElement('slides', 'Slides'), "Slideshow");
+				$this->addFormElement(new Checkbox("useSlideshow", 'Display banner/slideshow'), "Banner/Slideshow");
+				//
+				// /** @var ImageProperty $imageProperty */
+				$this->addFormElement(new GridElement('slides', 'Slides'), "Banner/Slideshow");
 			}
 
 			$this->addFormElement(new Text("title", 'Page Title'), "Metadata");

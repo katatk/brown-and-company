@@ -92,6 +92,31 @@ CREATE TABLE IF NOT EXISTS `two_col` (
   PRIMARY KEY (`page_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ;
 
+CREATE TABLE IF NOT EXISTS `rows_page` (
+  `page_id` int(4) unsigned NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`page_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ;
+
+CREATE TABLE IF NOT EXISTS `page_rows` (
+  `page_rows_id` int(4) unsigned NOT NULL AUTO_INCREMENT,
+  `page_id` int(4) unsigned NOT NULL,
+  `image` varchar(250) DEFAULT NULL,
+  `text` text NOT NULL,
+  `position` int(4) UNSIGNED NOT NULL DEFAULT '10',
+  PRIMARY KEY (`page_rows_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ;
+
+
+CREATE TABLE IF NOT EXISTS `services_page` (
+  `page_id` int(4) unsigned NOT NULL AUTO_INCREMENT,
+  `image_one` varchar(250) DEFAULT NULL,
+  `text_one` text NOT NULL,
+  `image_two` varchar(250) DEFAULT NULL,
+  `text_two` text NOT NULL,
+  PRIMARY KEY (`page_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ;
+
+
 
 CREATE TABLE IF NOT EXISTS `servicing_page` (
   `page_id` int(4) unsigned NOT NULL AUTO_INCREMENT,
@@ -112,20 +137,17 @@ CREATE TABLE IF NOT EXISTS `content_page` (
 
 CREATE TABLE IF NOT EXISTS `home_page` (
   `page_id` int(4) unsigned NOT NULL AUTO_INCREMENT,
-  `image_1` varchar(250) DEFAULT NULL,
   `banner_title` varchar(72) NOT NULL DEFAULT '',
   `banner_text` text NOT NULL DEFAULT '',
   `banner_button` varchar(72) NOT NULL DEFAULT '',
-  `blue_1_title` varchar(72) NOT NULL DEFAULT '',
-  `blue_1_text` text NOT NULL DEFAULT '',
-  `blue_2_title` varchar(72) NOT NULL DEFAULT '',
-  `blue_2_text` text NOT NULL DEFAULT '',
-  `blue_3_title` varchar(72) NOT NULL DEFAULT '',
-  `blue_3_text` text NOT NULL DEFAULT '',
-  `blue_4_title` varchar(72) NOT NULL DEFAULT '',
-  `blue_4_text` text NOT NULL DEFAULT '',
-  `image_2` varchar(250) DEFAULT NULL,
-  `image_3` varchar(250) DEFAULT NULL,
+  `content_button` varchar(72) NOT NULL DEFAULT '',
+  `image_1` varchar(250) DEFAULT NULL,
+  `second_section_title` varchar(72) NOT NULL DEFAULT '',
+  `second_section_text` text NOT NULL DEFAULT '',
+  `second_section_button` varchar(72) NOT NULL DEFAULT '',
+  `third_section_title` varchar(72) NOT NULL DEFAULT '',
+  `third_section_text` text NOT NULL DEFAULT '',
+  `third_section_button` varchar(72) NOT NULL DEFAULT '',
   PRIMARY KEY (`page_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ;
 

@@ -1,0 +1,57 @@
+{% extends 'products/products-page.twig' %}
+
+{% block canonical_link %}
+	<link rel="canonical" href="{{ product.getCanonicalLink() }}" />
+{% endblock %}
+
+{% block products_content %}
+	<div class="product-images js-product-images">
+		{% if product.activeImages[0] is defined and product.activeImages[0].image is defined %}
+			<a class="main-image image" href="{{ product.activeImages[0].image.getLink() }}" data-src="{{ product.activeImages[0].image.getLink() }}">
+				{{ product.activeImages[0].thumbnail.tag()|raw }}
+			</a>
+		{% endif %}
+
+		<div class="small-images">
+			{% if product.activeImages|length > 1 %}
+				{% for i in range(1, (product.activeImages|length - 1)) %}
+					<a class="small-image image" href="{{ product.activeImages[i].image.getLink() }}" data-src="{{ product.activeImages[i].image.getLink() }}">
+						{{ product.activeImages[i].thumbnail.tag()|raw }}
+					</a>
+				{% endfor %}
+			{% endif %}
+		</div>
+	</div>
+	<div class="product-details">
+		{{ product.description|raw }}
+		{% if 'Cart'|isEnabled %}
+			<form class="js-add-to-cart-form add-to-cart custom-form" action="/Cart/Action/Add/{{ controller.callStatic('Products\\Product', 'getClassLineItemGeneratorIdentifier') }}/{{ product.getLineItemGeneratorIdentifier() }}/" method="post">
+				{% for optionGroup in product.optionGroups %}
+					<p>
+						<label class="select-wrapper"><span class="label">{{ optionGroup.name }}</span> <span class="field"><select name="options[{{ optionGroup.id }}]">
+							{% for option in optionGroup %}
+								<option value="{{ option.id }}">{{ option.name }}</option>
+							{% endfor %}
+						</select></span></label>
+					</p>
+				{% endfor %}
+				<p>
+					<label><span class="label">Quantity</span> <input type="number" name="quantity" value="1" class="field" /></label>
+				</p>
+				<p>
+					<input type="submit" value="Add to Cart" class="button" />
+				</p>
+			</form>
+		{% endif %}
+	</div>
+	<div class="clear"></div>
+
+	{% if constant('MODULE_PRODUCTS_ASSOCIATED') and product.associatedProductCategories|length > 0 %}
+		<h2>You may also be interested...</h2>
+		<ul class="product-links">
+			{% for associatedProduct in product.associatedProductCategories %}
+				{% include 'products/sections/product-summary.twig' with {'product': associatedProduct.to.product } only %}
+			{% endfor %}
+		</ul>
+	{% endif %}
+{% endblock %}

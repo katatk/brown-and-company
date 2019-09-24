@@ -1,0 +1,17 @@
+{% extends 'products/products-page.twig' %}
+
+{% block products_content %}
+	<p>{{ category.description|raw }}</p>
+	{% if category.products|length > 0 %}
+		<div class="products">
+			<ul class="product-links">
+				{% for product in category.products %}
+					{% include 'products/sections/product-summary.twig' %}
+				{% endfor %}
+			</ul>
+		</div>
+		<br class="clear" />
+	{% else %}
+		<p class="center">No products were found in this category.</p>
+	{% endif %}
+{% endblock %}

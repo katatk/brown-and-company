@@ -1,0 +1,56 @@
+{% set slideAsBackground = true %}
+
+{% if slides | active | length > 0 %}
+  <section class="slideshow">
+    <div class="slider">
+      {% for slide in slides | active %}
+        {# Ignore slides without images #}
+        {% if slide.getSlideImage() != null %}
+          {#{% set caption = slide.getSlideCaption() %}#}
+          {% set slide_text = slide.getSlideText() %}
+
+          {% if slideAsBackground %}
+            <figure class="slide">
+              {% if slide.getSmallScreenImage() != null %}
+                <div class="small-screen background-image" style="background-image: url({{ slide.getSmallScreenImage().getLink() }})"></div>
+              {% endif %}
+              <div class="big-screen background-image" style="background-image: url({{ slide.getSlideImage().getLink() }})"></div>
+              <div class="wrapper ">
+                <div class="container h-100 d-flex flex-column justify-content-center">
+                  <div class="row">
+                    <div class="col-12 col-xl-10">
+
+                      {% if slide_text != "" %}
+                        {{ slide_text|raw }}
+                      {% endif %}
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+                {#{% if (caption != "") %}
+                <figcaption class="caption container">
+                  <div class="caption-content">
+                    {{ caption|raw }}
+                  </div>
+                </figcaption>
+              {% endif %}#}
+            </figure>
+          {% else %}
+            <figure class="slide">
+              <picture>
+                <source 1="1" srcset="{{ slide.getSlideImage().getLink() }}" media="(min-width: {{ constant(" page_slideshow_responsive_width") + 1 }}px)"="PAGE_SLIDESHOW_RESPONSIVE_WIDTH" )=")" +="+" }}px)""="}}px)"""/>
+                {% if slide.getSmallScreenImage() != null %}
+                  <source srcset="{{ slide.getSmallScreenImage().getLink() }}"/>
+                {% endif %}
+                <img src="{{ slide.getSlideImage().getLink() }}" alt=""/>
+              </picture>
+
+            </figure>
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+    </div>
+  </section>
+{% endif %}

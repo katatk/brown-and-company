@@ -1,0 +1,19 @@
+{% extends 'template.twig' %}
+
+{% block content %}
+    <div class="container main-content">
+      <h1>{{ page.contentTitle }}</h1>
+      <div class="row">
+        <div class="col-12 col-lg-6 mb-8 mb-lg-0">
+          {{ page.content|raw }}
+          <span class="button mt-1">{{ page.buttonText }} </span>
+
+        </div>
+          <div class="col-12 col-lg-6">
+            {% if page.auxImage.getFullLink() != null %}
+              <div class=""><img src='{{ page.auxImage.getFullLink()|raw }}' alt="{{ constant('SITE_FROM_NAME') }} {{ page.title }}" class="aux-img"></div>
+            {% endif %}
+          </div>
+      </div>
+      </div>
+{% endblock %}

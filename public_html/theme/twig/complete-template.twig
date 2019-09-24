@@ -88,7 +88,7 @@
 
   <body>
     <header role="banner">
-      <nav class="navbar navbar-expand-lg">
+      <nav class="navbar navbar-expand-xl">
         <div class="container d-flex align-items-center align-items-stretch">
           <div class="d-flex align-items-center justify-content-between">
           <div class="logo-container d-flex">
@@ -96,12 +96,6 @@
               <img class="logo" src="/theme/images/logo.png" alt="{{ constant('SITE_FROM_NAME') }}"/>
             </a>
           </div>
-          <a href="tel:{{ config.getPhoneDigits() }}" class="d-block text-white d-lg-none mx-4">
-            <i class="icon icon-phone mr-2"></i>
-            <span class="d-none d-sm-inline-block">{{ config.phoneOne }}</span>
-          </a>
-
-          {#{% include 'general/sections/search-form.twig' %}#}
           <button class="navbar-toggler" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon">
               <span></span>
@@ -121,15 +115,16 @@
               }
               only %}
 
-            <li class="nav-item">
-                <a href="tel:{{ config.getPhoneDigits() }}" class=" d-lg-none">
+            <li class="nav-item d-xl-none">
+                <a href="tel:{{ config.getPhoneDigits() }}" class="nav-link ">
                   <i class="icon icon-phone mr-2"></i>
                   <span>{{ config.phoneOne }}</span>
                 </a>
               </li>
             </ul>
           </div>
-          <a href="tel:{{ config.getPhoneDigits() }}" class="d-none d-lg-flex align-items-center py-3 text-white phone">
+
+          <a href="tel:{{ config.getPhoneDigits() }}" class="d-none d-xl-flex align-items-center py-3 phone">
             <i class="icon icon-phone mr-2"></i>
             <span>{{ config.phoneOne }}</span>
           </a>
@@ -140,47 +135,62 @@
     <!-- end header -->
     <main>
 
-      {% include 'general/sections/banner.twig' %}
+
+      {% include 'general/sections/slideshow.twig' %}
+        <!-- if homepage, get slideshow, else get banner -->
+      {#{% if (page.isHomepage) %}
+
+        {% else %}
+          {% include 'general/sections/banner.twig' %}
+      {% endif %}#}
 
         {% block content_wrapper %}
-          {% block content %}
-          {% endblock %}
+          {% if (page.isHomepage) == false %}
+            <div class="container-fluid content-wrapper">
+          {% endif %}
+
+        {% block content %}
+        {% endblock %}
+
+        {% if (page.isHomepage) == false %}
+          </div>
+        {% endif %}
         {% endblock %}
 
     </main>
 
     <!-- if contact page, show map -->
-    {% if (page.module == "Contact") and config.addressOne != '' %}
+    {#  {% if (page.module == "Contact") and config.address != '' %}
         <div class="map">
           {{ config.getMap()|raw }}
         </div>
-    {% endif %}
+    {% endif %}#}
 
 
     <footer role="contentinfo">
       <section class="site-footer">
-        <div class="container pt-16 pb-4 py-lg-20">
+        <div class="container pt-8 pt-lg-18 pb-lg-8">
           <div class="row">
-            <div class="col-12 order-3 order-lg-1 d-lg-flex col-lg-4 flex-column justify-content-start align-items-start mb-10 mb-lg-0 text-center text-lg-left">
-              <h4>{{ config.addressOneTitle }}</h4>
-              <p class="mb-lg-4">
-                {{ config.addressOne|nl2br }}<br>
+            <div class="col-12 order-3 order-lg-1 d-lg-flex col-lg-4 flex-column justify-content-start align-items-start text-center text-lg-left">
+              <h4>{{ config.addressOneTitle }} Office</h4>
+              <p>
+                {{ config.address|nl2br }}<br>
                 Phone:
-                <a class="" href="mailto:{{ config.getPhoneDigits() }}">{{ config.phoneOne }}</a>
+                <a class="" href="mailto:{{ config.getPhoneDigits() }}">{{ config.phoneOne }}</a><br>
                 Email:
                 <a class="" href="mailto:{{ config.email }}">{{ config.email }}</a>
               </p>
 
             </div>
-            <div class="col-12 order-1 order-lg-2 d-flex col-lg-4 flex-column mb-10 mb-lg-0 justify-content-start align-items-center text-center">
-              <img src="/theme/images/logo.png" alt="{{ constant('SITE_FROM_NAME') }}" class="img-fluid mb-8 mb-lg-12">
+            <div class="col-12 order-1 order-lg-2 d-flex col-lg-4 flex-column justify-content-start align-items-center text-center">
+              <img src="/theme/images/logo-footer.png" alt="{{ constant('SITE_FROM_NAME') }}" class="img-fluid">
             </div>
             <div class="col-12 order-4 order-lg-3 d-lg-flex col-lg-4 flex-column justify-content-start align-items-end text-center text-lg-right">
-              <h4>{{ config.addressTwoTitle }}</h4>
-              <p class="mb-lg-4">
+              <h4>{{ config.addressTwoTitle }} Office</h4>
+              <p>
                 {{ config.addressTwo|nl2br }}<br>
                 Phone:
-                <a class="" href="mailto:{{ config.getSecondaryPhoneDigits() }}">{{ config.phoneTwo }}</a>
+                <a class="" href="mailto:{{ config.getSecondaryPhoneDigits() }}">{{ config.phoneTwo }}</a><br>
                 Email:
                 <a class="" href="mailto:{{ config.email }}">{{ config.email }}</a>
               </p>
@@ -189,13 +199,13 @@
         </div>
       </section>
       <section class="sub-footer">
-        <div class="container py-9">
+        <div class="container py-8">
           <div class="row">
-            <div class="col-12 col-md-6 d-md-flex mb-1 mb-md-0 flex-column justify-content-center align-items-start text-center text-md-left">
-              <span>&copy; {{ constant('SITE_FROM_NAME') }} - All Rights Reserved</span>
+            <div class="col-12 col-lg-6 d-lg-flex mb-1 mb-lg-0 flex-column justify-content-center align-items-start text-center text-lg-left">
+              <span>&copy; {{ "now"|date('Y') }} {{ constant('SITE_FROM_NAME') }}</span>
             </div>
 
-            <div class="col-12 col-md-6 d-md-flex  flex-column justify-content-center align-items-end text-center text-md-right">
+            <div class="col-12 col-lg-6 d-lg-flex flex-column justify-content-center align-items-end text-center text-lg-right">
               <span>
                 <a href="https://www.activatedesign.co.nz/" target="_blank" {% if not page.isHomepage %} rel="nofollow" {% endif %}>Web Design by Activate</a>
               </span>

@@ -30,7 +30,7 @@
 			parent::properties();
 
 			static::addProperty(new Property("buttonText", "button_text", "string"));
-			static::addProperty(new ImageProperty('auxImage', 'aux_image', static::IMAGE_LOCATION, static::IMAGE_WIDTH, static::IMAGE_HEIGHT), static::TABLE);
+			static::addProperty(new ImageProperty('auxImage', 'image', static::IMAGE_LOCATION, static::IMAGE_WIDTH, static::IMAGE_HEIGHT), static::TABLE);
 		}
 
 		/**

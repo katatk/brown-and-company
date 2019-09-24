@@ -35,7 +35,7 @@
 		public $phoneTwo = '';
 		public $email = '';
 		public $addressOneTitle = '';
-		public $addressOne = '';
+		public $address = '';
 		public $addressTwoTitle = '';
 		public $addressTwo = '';
 
@@ -50,9 +50,9 @@
 			static::addProperty(new Property('phoneOne', 'phone_one', 'string'));
 			static::addProperty(new Property('phoneTwo', 'phone_two', 'string'));
 			static::addProperty(new Property('email', 'email', 'string'));
-			static::addProperty(new Property('addressOneTitle', 'address_one', 'string'));
-			static::addProperty(new Property('addressOne', 'address_one', 'string'));
-			static::addProperty(new Property('addressTwoTitle', 'address_two', 'string'));
+			static::addProperty(new Property('addressOneTitle', 'address_one_title', 'string'));
+			static::addProperty(new Property('address', 'address', 'string'));
+			static::addProperty(new Property('addressTwoTitle', 'address_two_title', 'string'));
 			static::addProperty(new Property('addressTwo', 'address_two', 'string'));
 
 		}
@@ -166,7 +166,7 @@
 			$this->addFormElement((new Text('email', 'Email'))->addValidation(Element::REQUIRED), 'Contact Details');
 
 			$this->addFormElement(new Text('addressOneTitle', 'Address One Label'), 'Contact Details');
-			$this->addFormElement(new Textarea('addressOne', 'Address One'), 'Contact Details');
+			$this->addFormElement(new Textarea('address', 'Address One'), 'Contact Details');
 			$this->addFormElement(new Text('phoneOne', 'Phone One'), 'Contact Details');
 
 			$this->addFormElement(new Text('addressTwoTitle', 'Address Two Label'), 'Contact Details');
@@ -186,7 +186,7 @@
 
  			$html = "";
  			$html .= "<h1>\n";
- 				$html .= "Edit " . ($labelProperty === "id" ? ucfirst(static::SINGULAR) : $this->$labelProperty) . "\n";
+ 			$html .= "Edit " . ($labelProperty === "id" ? ucfirst(static::SINGULAR) : $this->$labelProperty) . "\n";
  			$html .= "</h1>\n";
 
  			return $html;

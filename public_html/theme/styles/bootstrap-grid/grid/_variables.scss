@@ -199,6 +199,7 @@ $sizes: map-merge(
 
 $grid-breakpoints: (
   xs: 0,
+  custom: 340px,
   sm: 576px,
   md: 768px,
   lg: 992px,
@@ -214,6 +215,7 @@ $grid-breakpoints: (
 // Define the maximum width of `.container` for different screen sizes.
 
 $container-max-widths: (
+  custom: 300px,
   sm: 540px,
   md: 720px,
   lg: 960px,

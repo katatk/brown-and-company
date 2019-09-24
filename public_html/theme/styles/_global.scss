@@ -29,8 +29,8 @@ video {
 body {
   margin: 0;
   padding: 0;
-  background: $BACKGROUND;
-  color: $DARK-COLOUR;
+  background: $LIGHT-BACKGROUND;
+  color: $PRIMARY-HIGHLIGHT;
   font-family: $CONTENT-FONT;
 
   //noinspection CssUnknownProperty
@@ -42,24 +42,38 @@ body {
 }
 
 @include headings {
-  margin: 0 0 2.5rem;
+  margin: 0 0 2rem;
   font-family: $HEADING-FONT;
-  font-weight: 400;
+  font-weight: 300;
   line-height: 1.4;
 }
 
 
 h1 {
-  font-size: 3.8rem;
-  font-weight: 500;
-  text-transform: uppercase;
+  font-size: 2.8rem;
+
+  @include above($XL-BREAKPOINT) {
+    font-size: 3.1rem;
+  }
+
+
+  @include above($LAPTOP-BREAKPOINT) {
+    font-size: 3.8rem;
+  }
+
+
+  text-transform: capitalize;
   margin-bottom: 3rem;
 
   @include underline;
 }
 
 h2 {
-  font-size: 3.5rem;
+  font-size: 2.5rem;
+
+  @include above($LG-BREAKPOINT) {
+    font-size: 2.7rem;
+  }
 }
 
 h3 {
@@ -71,7 +85,6 @@ h3 {
 h4 {
   font-size: 2.2rem;
   color: $PRIMARY-HIGHLIGHT;
-  font-weight: 500;
 }
 
 h5 {
@@ -80,7 +93,7 @@ h5 {
 
 h6 {
   font-size: 1.8rem;
-  font-weight: 600;
+  font-weight: 400;
   margin-bottom: 0.5rem;
 }
 
@@ -88,17 +101,21 @@ p,
 ul,
 ol {
   margin-top: 0;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
 }
 
 p,
 span,
 a,
 ul,
-ol,
+ol {
+  font-size: inherit;
+  line-height: 1.6;
+}
+
 li {
   font-size: inherit;
-  line-height: 1.5;
+  line-height: 1.4;
 }
 
 li:not(.nav-item) {
@@ -107,7 +124,7 @@ li:not(.nav-item) {
 
 ul,
 ol {
-  padding-left: 0;
+  padding-left: 20px;
   list-style-position: outside;
 }
 
@@ -119,7 +136,7 @@ a {
   &:active:not(.button),
   &:focus:not(.button) {
     color: $PRIMARY-HOVER;
-    transition: color ease 0.5s;
+    transition: color ease-in-out 0.5s;
   }
 
   img {
@@ -141,16 +158,16 @@ button {
 }
 
 /*** globally relevant styles ***/
-.main-content {
-  padding-top: 8rem;
-  padding-bottom: 12rem;
+.container.main-content {
+  // padding-top: 8rem;
+  // padding-bottom: 12rem;
 }
 
 .button {
-  transition: background-color ease 0.5s;
+  transition: background-color ease-in-out 0.5s;
   display: inline-block;
   font-size: 1.4rem;
-  padding: 2rem 2.5rem;
+  padding: 1.75rem 3rem;
   font-weight: 400;
   text-transform: uppercase;
   background: $PRIMARY-HIGHLIGHT;
@@ -165,6 +182,16 @@ button {
     background: $PRIMARY-HOVER;
     text-decoration: none;
   }
+
+
+  &.light {
+    background: #fff;
+    color: $PRIMARY-HIGHLIGHT;
+
+    @include hover {
+      background: darken(#fff, 15%);
+    }
+  }
 }
 
 /** These styles can be added to images and media through TinyMCE */
@@ -172,17 +199,19 @@ button {
 .float-left {
   float: left;
   margin-right: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 .float-right {
   float: right;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   margin-left: 10px;
 }
 
 .float-left,
 .float-right {
+  text-align: center;
+
   @include responsive {
     display: block;
     float: none;
@@ -218,7 +247,7 @@ button {
 
 
     @include above($NAV-BREAKPOINT) {
-      height: 700px;
+      // height: 700px;
     }
   }
 }
@@ -404,26 +433,46 @@ main {
 footer {
   z-index: 0;
   font-weight: $LIGHT;
+  background-color: $PRIMARY-HIGHLIGHT;
+  color: $LIGHT-COLOUR;
 
   p, a, span {
     font-size: 1.6rem;
+    color: $LIGHT-COLOUR;
+  }
+
+  a {
+    &:hover, &:active, &:focus {
+      color: lighten($LIGHT-COLOUR, 10%) !important;
+    }
   }
 
   h4 {
-    color: #fff;
     font-size: 2.4rem;
     text-transform: uppercase;
+    color: #fff;
+    font-weight: 300;
+  }
+
+  .site-footer {
+    p {
+      line-height: 1.7;
+      margin-bottom: 0;
+    }
+
+    .col-12:not(:last-child) {
+      margin-bottom: 5rem;
+
+      @include above($LG-BREAKPOINT) {
+        margin-bottom: 0;
+      }
+    }
   }
 
   .sub-footer {
     p, a, span {
       font-size: 1.4rem;
-
-      @include above($LG-BREAKPOINT) {
-        font-size: 1.3rem;
-      }
-
-
+      color: #999999;
       margin-bottom: 1.5rem;
 
       &:last-child {
@@ -656,9 +705,10 @@ a.no-underline {
 }
 
 hr {
-  height: 4px;
-  background-color: $LIGHT-COLOUR;
+  height: 1px;
+  background-color: $LIGHT-BACKGROUND;
   border: none;
+  height: 100%;
 }
 
 .pos-relative {

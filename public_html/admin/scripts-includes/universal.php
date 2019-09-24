@@ -24,7 +24,7 @@
 	/**
 	 * @var string SITE_FROM_NAME send email notifications from this name unless otherwise defined
 	 */
-	define('SITE_FROM_NAME', "Brown &amp; Company Planning Group" ?? "Unit Tests");
+	define('SITE_FROM_NAME', "Brown & Company Planning Group" ?? "Unit Tests");
 
 	/**
 	 * Google API credentials
@@ -76,21 +76,23 @@
 	 * @var bool SITE_SECONDARY_NAV does the template have a partial duplication of the main menu
 	 *		anywhere (usually in the footer); triggers a checkbox to include pages on this menu
 	 */
-	define('PAGE_HAS_SLIDESHOW', false);
+	define('PAGE_HAS_SLIDESHOW', true);
 	define('PAGE_SLIDE_HAS_MULTIPLE_IMAGES', false);//If this is true, you should really set slideAsBackground in _slideshow.twig to true as well
-	define('PAGE_SLIDESHOW_WIDTH', 2560);
-	define('PAGE_SLIDESHOW_HEIGHT', 387);
+	define('PAGE_SLIDESHOW_WIDTH', 1900);
+	define('PAGE_SLIDESHOW_HEIGHT', 788);
 	define('PAGE_SLIDESHOW_RESPONSIVE_WIDTH', 600);
 	define('PAGE_SLIDESHOW_RESPONSIVE_HEIGHT', 340);
-	define('PAGE_HOMEPAGE_SLIDESHOW_WIDTH', 2560);
-	define('PAGE_HOMEPAGE_SLIDESHOW_HEIGHT', 823);
-	define('PAGE_SLIDESHOW_CAPTION', false);
-	define('PAGE_SLIDESHOW_LINK', false);
-	define("PAGE_SLIDESHOW_BUTTON", false);
-	define('PAGE_BANNER', true);
-	define('PAGE_BANNER_TEXT', true);
-	define('PAGE_BANNER_HEIGHT', 585);
-	define('PAGE_BANNER_WIDTH', 1900);
+	define('PAGE_HOMEPAGE_SLIDESHOW_WIDTH', 1900);
+	define('PAGE_HOMEPAGE_SLIDESHOW_HEIGHT', 889);
+	define('PAGE_SLIDESHOW_CAPTION', true);
+	define('PAGE_SLIDESHOW_LINK', true);
+	define("PAGE_SLIDESHOW_BUTTON", true);
+	// define('PAGE_BANNER', true);
+	// define('PAGE_BANNER_TEXT', true);
+	// define('PAGE_BANNER_HEIGHT', 788);
+	// define('PAGE_BANNER_WIDTH', 1900);
+	// define('PAGE_HOMEPAGE_BANNER_HEIGHT', 889);
+	// define('PAGE_HOMEPAGE_BANNER_WIDTH', 1900);
 	define('PAGE_AUX_IMAGE', true);
 	define('PAGE_AUX_WIDTH', 950);
 	define('PAGE_AUX_HEIGHT', 650);
@@ -106,8 +108,8 @@
 	 */
 	define('GALLERY_IMAGE_WIDTH', 1000);
 	define('GALLERY_IMAGE_HEIGHT', 800);
-	define('GALLERY_THUMBNAIL_WIDTH', 500);
-	define('GALLERY_THUMBNAIL_HEIGHT', 500);
+	define('GALLERY_THUMBNAIL_WIDTH', 305);
+	define('GALLERY_THUMBNAIL_HEIGHT', 305);
 
 	/**
 	 * Products image dimensions
@@ -242,6 +244,17 @@
 	define('BLOG_THUMBNAIL_WIDTH', 710);
  	define('BLOG_THUMBNAIL_HEIGHT', 428);
 
+	// for projects
+	// size for individual project page slides
+ 	define('PROJECT_SLIDE_WIDTH', 1411);
+ 	define('PROJECT_SLIDE_HEIGHT', 881);
+	// size for Projects page
+	define('PROJECT_WIDTH', 660);
+	define('PROJECT_HEIGHT', 328);
+	// thumbnails (for home page)
+	define('PROJECT_THUMBNAIL_WIDTH', 302);
+ 	define('PROJECT_THUMBNAIL_HEIGHT', 302);
+
 
 	/**
 	 * Testimonials module
@@ -253,6 +266,10 @@
 	define('TESTIMONIAL_IMAGE', false);
 	define('TESTIMONIAL_IMAGE_WIDTH', 120);
 	define('TESTIMONIAL_IMAGE_HEIGHT', 0);
+
+	define('STAFF_IMAGE', true);
+	define('STAFF_IMAGE_WIDTH', 227);
+	define('STAFF_IMAGE_HEIGHT', 309);
 
 	/*****
 	 * Internals

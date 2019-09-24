@@ -1,0 +1,8 @@
+<h2>Featured Products</h2>
+<div class="featured">
+	<ul class="product-links">
+		{% for product in controller.callStatic('Products\\Product', 'getFeatured') %}
+			{% include 'products/sections/product-summary.twig' %}
+		{% endfor %}
+	</ul>
+</div>

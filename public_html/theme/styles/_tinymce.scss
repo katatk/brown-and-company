@@ -1,42 +1,41 @@
 /* tinymce universal formatting */
-#tinymce
-{
-	max-width: $CONTENT-WIDTH;
-	padding: 10px;
-	background: #fff;
-	color: $DARK-COLOUR;
-	font-size: 2rem;
-	text-align: left;
+#tinymce {
+  max-width: $CONTENT-WIDTH;
+  padding: 10px;
+  background: #fff;
+  color: $DARK-COLOUR;
+  font-size: 2rem;
+  text-align: left;
 
-	p,
-	ul,
-	ol
-	{
-			margin: 0 0 3rem;
-	}
+  ul,
+  ol {
+    list-style-position: inside;
+  }
 
-	p,
-	a,
-	li,
-	span
-	{
-		font-size: 2rem;
-	}
+  p,
+  ul,
+  ol {
+    margin: 0 0 3rem;
+  }
 
-	form
-	{
-		outline: 1px dotted $DARK-NEUTRAL-COLOUR;
-	}
+  p,
+  a,
+  li,
+  span {
+    font-size: 1.6rem;
+  }
 
-	a
-	{
-		border-bottom: 1px dotted $DARK-NEUTRAL-COLOUR;
-		text-decoration: none;
-	}
+  form {
+    outline: 1px dotted $DARK-NEUTRAL-COLOUR;
+  }
 
-	td
-	{
-		font-family: inherit;
-		font-size: inherit;
-	}
+  a {
+    border-bottom: 1px dotted $DARK-NEUTRAL-COLOUR;
+    text-decoration: none;
+  }
+
+  td {
+    font-family: inherit;
+    font-size: inherit;
+  }
 }

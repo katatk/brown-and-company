@@ -1,0 +1,35 @@
+{% extends 'template.twig' %}
+
+{% block content %}
+  <div class="container main-content pb-0">
+    {% if page.contentTitle != '' %}
+      <h1>{{ page.contentTitle }}</h1>
+    {% endif %}
+    {{ page.output()|raw }}
+    <div class="row mt-6">
+      {% for project in projects %}
+
+        <div class="col-12 col-lg-6 mb-6">
+          {% if project.activePhotos[0] != null %}
+            <a href="{{ project.path }}" class="project-img-container slide">
+              <img src="{{ project.activePhotos[0].thumbnail.getLink() }}" alt=" {{ project.title }} - {{ constant('SITE_FROM_NAME') }} ">
+                <figcaption>{{ project.attribution|raw }}</figcaption>
+            </a>
+          {% endif %}
+
+          <div class="mt-2">
+            <a href="{{ project.path }}">
+              <h3>{{ project.title }}</h3>
+            </a>
+          </div>
+        </div>
+
+      {% endfor %}
+    </div>
+  </div>
+
+  {# {% if projects.totalPages() > 1 %}
+		<div class="blog-pagination">{{ projects.generatePageLinks(page.getNavPath() ~ '?page=')|raw }}</div>
+	{% endif %} #}
+
+{% endblock %}

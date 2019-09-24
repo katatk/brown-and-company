@@ -1,0 +1,34 @@
+{% extends 'template.twig' %}
+
+{% block content %}
+  <div class="container main-content">
+    <h1>{{ project.title }}</h1>
+
+    <section class="slideshow">
+      <div class="slider">
+        {% for photos in project.activePhotos %}
+          <figure class="slide">
+
+            {{ project.activePhotos[loop.index0].photo.tag()|raw }}
+            <figcaption>{{ project.attribution|raw }}</figcaption>
+
+          </figure>
+        {% endfor %}
+      </div>
+    </section>
+    <div class="py-4">
+      {{ project.content|raw }}
+      <p>
+        <a class="button" href="{{ page.getNavPath() }}">Back to Projects</a>
+      </p>
+
+      {#
+			<p>
+		{% if not project.previous.isNull() %} <a class="button" href="{{ project.previous.path }}">Previous Article</a> {% endif %}
+	{% if not project.next.isNull() %} <a class="button" href="{{ project.next.path }}">Next Article</a> {% endif %}
+			</p>
+			#}
+    </div>
+  </div>
+</div>
+{% endblock %}

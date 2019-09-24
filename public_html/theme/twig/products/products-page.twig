@@ -1,0 +1,33 @@
+{% extends 'template.twig' %}
+
+{% block content %}
+	{% if product != null and not product.isNull() %}
+		<h1>{{ product.getTitle() }}</h1>
+	{% elseif category != null and not category.isNull() %}
+		<h1>{{ category.getTitle() }}</h1>
+	{% endif %}
+	{% if catNavItems|length > 0 %}
+		<div class='sidebar category-nav'>
+			<ul>
+				{% include "general/sections/navigation.twig" with {
+					"navItems": catNavItems,
+					"currentDepth": 1,
+					"maxDepth": 2,
+					"currentNavItem": category
+				} only %}
+			</ul>
+		</div>
+		<div class='has-sidebar'>
+			{% block products_content %}
+				{#
+					Because the controller redirects to the first category, we will only get here if theres no categories
+				 	and the sidebar and this isn't displayed if there isn't any categories
+				#}
+			{% endblock %}
+		</div>
+	{% else %}
+		{{ page.output()|raw }}
+		{# Because the controller redirects to the first category, we will only get here if theres no categories #}
+		<p>No products found</p>
+	{% endif %}
+{% endblock %}

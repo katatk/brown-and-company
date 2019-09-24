@@ -1,2 +1,312 @@
 // homepage design tends to vary from the rest of the site; for easy management homepage specific
 // styles should go in here rather than bulking up _main.scss
+
+// banner
+
+.banner {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 400px;
+
+  @include above($LG-BREAKPOINT) {
+    height: 550px;
+  }
+
+
+  @include above($LAPTOP-BREAKPOINT) {
+    height: 788px;
+  }
+}
+
+.content-wrapper {
+  background: $LIGHT-BACKGROUND;
+  padding: 20px;
+
+  @include above($LAPTOP-BREAKPOINT) {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+
+  .main-content {
+    padding-left: 4rem;
+    padding-right: 4rem;
+    padding: 4rem;
+    background-color: #fff;
+    box-shadow: 0px 0px 46px 0px rgba(181, 210, 217, 0.4);
+
+    @include above($LAPTOP-BREAKPOINT) {
+      position: relative;
+      top: -4rem;
+      margin-bottom: 6rem;
+    }
+
+
+    a:not(.button) {
+      color: #000;
+
+      &:hover {
+        color: lighten(#000, 30%);
+      }
+    }
+  }
+}
+
+// hover effects for project photos
+@include above($LG-BREAKPOINT) {
+  a.project-img-container {
+    display: flex;
+    position: relative;
+
+    &:hover {
+      &::before {
+        opacity: 1;
+      }
+    }
+
+    &::before {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      content: '';
+      height: 100%;
+      width: 100%;
+      display: block;
+      background-color: rgba(52, 66, 73, 0.6);
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+    }
+  }
+}
+
+// page specific
+
+.Home {
+  .main-content {
+    padding: 0;
+    background-color: transparent;
+    box-shadow: none;
+    position: static;
+    margin-bottom: 0;
+
+    @include above($LG-BREAKPOINT) {
+      margin-bottom: 6rem;
+    }
+
+
+    .col-12 {
+      @include above($LAPTOP-BREAKPOINT) {
+        position: relative;
+        top: -5rem;
+      }
+
+
+      &:first-child .bg-white {
+        padding: 4rem;
+        box-shadow: 0px 0px 46px 0px rgba(181, 210, 217, 0.4);
+      }
+    }
+  }
+
+  // for the gallery
+  .d-custom-block .row {
+    max-width: 1900px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .container-fluid.projects, .container-fluid.services {
+    position: relative;
+
+    .inner {
+      padding: 4rem 20px;
+      background-color: $PRIMARY-HIGHLIGHT;
+      color: #fff;
+
+      @include above($LG-BREAKPOINT) {
+        background-color: rgba(52, 66, 73, 0.9);
+        max-width: 650px;
+        position: absolute;
+        z-index: 2;
+        padding: 7rem;
+      }
+
+
+      h2 {
+        @include underline(#fff);
+      }
+    }
+  }
+
+  // projects section
+  .container-fluid.projects {
+    .projects-img {
+      background-image: url("/theme/images/home-projects.jpg");
+      background-repeat: no-repeat;
+      background-size: cover;
+      width: 100%;
+
+      @include above($LG-BREAKPOINT) {
+        height: 600px;
+      }
+
+      @include above($XL-BREAKPOINT) {
+        height: 805px;
+      }
+    }
+
+    .inner {
+      @include above($LG-BREAKPOINT) {
+        top: 0;
+        right: 0;
+      }
+    }
+  }
+
+  .container-fluid.services {
+
+    .services-img {
+      background-image: url("/theme/images/home-services.jpg");
+      background-repeat: no-repeat;
+      background-size: cover;
+      width: 100%;
+
+      @include above($LG-BREAKPOINT) {
+        height: 600px;
+      }
+
+      @include above($XL-BREAKPOINT) {
+        height: 805px;
+      }
+    }
+
+    .inner {
+      @include above($LG-BREAKPOINT) {
+        bottom: 0;
+        left: 0;
+      }
+    }
+  }
+}
+
+// staff
+
+.staff-container {
+  .col-12 {
+    padding-bottom: 2rem;
+  }
+
+  .row:not(:last-child) .col-12 {
+    ::after {
+      content: '';
+      height: 1px;
+      width: calc(100% - 40px);
+      background-color: $LIGHT-BACKGROUND;
+      position: absolute;
+      bottom: 0;
+      left: 20px;
+    }
+  }
+
+  .row:nth-child(even) {
+    @include above($LG-BREAKPOINT) {
+      .staff-text {
+        order: 1;
+      }
+
+      .staff-img {
+        order: 2;
+        margin-left: 4rem;
+      }
+    }
+  }
+}
+
+.staff-container .row:nth-child(odd) {
+  .staff-img {
+    margin-right: 4rem;
+  }
+}
+
+.staff-text {
+  flex: 1 1 100%;
+}
+
+.staff-img {
+  margin-bottom: 2.5rem;
+
+  @include above($LG-BREAKPOINT) {
+    margin-bottom: 2rem;
+  }
+
+
+  text-align: center;
+}
+
+$arrow-size: 20px;
+
+.Projects {
+  .main-content {
+    padding-bottom: 0;
+  }
+
+
+
+
+  .slideshow {
+    button.slick-arrow {
+      background-color: rgba(0, 0, 0, 0.9);
+      border-radius: 0;
+      top: auto;
+      width: 50px;
+      height: 50px;
+
+      &.slick-next {
+        right: auto;
+        left: calc(50% + 1px);
+
+        &::before {
+          left: calc(50% - 8px);
+        }
+      }
+
+      &.slick-prev {
+        right: calc(50% + 1px);
+        left: auto;
+
+        &::before {
+          right: calc(50% + 8px);
+        }
+      }
+
+      &::before {
+        width: 16px;
+        height: 16px;
+      }
+    }
+  }
+
+  .slide {
+    position: relative;
+
+    figcaption {
+      position: absolute;
+      bottom: 5px;
+      right: 5px;
+      color: #fff;
+    }
+  }
+}
+
+// custom logo placement footer
+footer {
+  img {
+    @include above($LG-BREAKPOINT) {
+      position: relative;
+      top: -30px;
+    }
+  }
+}

@@ -2,6 +2,7 @@
 	namespace Pages\Home;
 
 	use Pages\Page;
+	use Pages\ContentPage;
 
   use DatabaseObject\FormElement\Editor;
   use DatabaseObject\FormElement\Text;
@@ -9,41 +10,30 @@
 	use DatabaseObject\Property\ImageProperty;
 	use DatabaseObject\FormElement\ImageElement;
 	use DatabaseObject\FormElement\Textarea;
+	use DatabaseObject\FormElement\Checkbox;
+	use DatabaseObject\FormElement\GridElement;
 
 	use Files\Image;
 
-	class HomePage extends Page
+	class HomePage extends ContentPage
 	{
 
 		const TABLE = "home_page";
 
+		const SLIDE_CLASS = HomeSlide::class;
+
+
 		public $image_1 = null;
-		public $banner_title = '';
-		public $banner_text = '';
-		public $banner_button = '';
 
-		public $blue_1_link = '';
-		public $blue_1_title = '';
-		public $blue_1_text = '';
+		public $second_section_title = '';
+		public $second_section_text = '';
+		public $second_section_button = '';
+		public $second_section_button_link = '';
 
-		public $blue_2_link = '';
-		public $blue_2_title = '';
-		public $blue_2_text = '';
-
-		public $blue_3_link = '';
-		public $blue_3_title = '';
-		public $blue_3_text = '';
-
-		public $blue_4_link = '';
-		public $blue_4_title = '';
-		public $blue_4_text = '';
-
-		public $image_2 = null;
-		public $image_3 = null;
-
-		const IMAGE_LOCATION = DOC_ROOT . "/resources/images/page/";
-		const IMAGE_WIDTH = PAGE_AUX_WIDTH;
-		const IMAGE_HEIGHT = PAGE_AUX_HEIGHT;
+		public $thrid_section_title = '';
+		public $thrid_section_text = '';
+		public $thrid_section_button = '';
+		public $thrid_section_button_link = '';
 
 
 		/**
@@ -53,25 +43,20 @@
 		{
 			parent::properties();
 
-			static::addProperty(new ImageProperty('image_1', 'image_1', static::IMAGE_LOCATION, static::IMAGE_WIDTH, static::IMAGE_HEIGHT), static::TABLE);
-			static::addProperty(new Property("banner_title", "banner_title", "string"));
-			static::addProperty(new Property("banner_text", "banner_text", "html"));
-			static::addProperty(new Property("banner_button", "banner_button", "string"));
 
-			static::addProperty(new Property("blue_1_link", "blue_1_link", "string"));
-			static::addProperty(new Property("blue_1_title", "blue_1_title", "string"));
-			static::addProperty(new Property("blue_1_text", "blue_1_text", "html"));
-			static::addProperty(new Property("blue_2_title", "blue_2_title", "string"));
-			static::addProperty(new Property("blue_2_link", "blue_2_link", "html"));
-			static::addProperty(new Property("blue_2_text", "blue_2_text", "html"));
-			static::addProperty(new Property("blue_3_link", "blue_3_link", "string"));
-			static::addProperty(new Property("blue_3_title", "blue_3_title", "string"));
-			static::addProperty(new Property("blue_3_text", "blue_3_text", "html"));
-			static::addProperty(new Property("blue_4_link", "blue_4_link", "string"));
-			static::addProperty(new Property("blue_4_title", "blue_4_title", "string"));
-			static::addProperty(new Property("blue_4_text", "blue_4_text", "html"));
 
-			static::addProperty(new ImageProperty('image_2', 'image_2', static::IMAGE_LOCATION, static::IMAGE_WIDTH, static::IMAGE_HEIGHT), static::TABLE);		static::addProperty(new ImageProperty('image_3', 'image_3', static::IMAGE_LOCATION, static::IMAGE_WIDTH, static::IMAGE_HEIGHT), static::TABLE);
+
+			static::addProperty(new Property("second_section_title", "second_section_title", "string"));
+			static::addProperty(new Property("second_section_text", "second_section_text", "html"));
+			static::addProperty(new Property("second_section_button", "second_section_button", "string"));
+			static::addProperty(new Property("second_section_button_link", "second_section_button_link", "string"));
+
+			static::addProperty(new Property("third_section_title", "third_section_title", "string"));
+			static::addProperty(new Property("third_section_text", "third_section_text", "html"));
+			static::addProperty(new Property("third_section_button", "third_section_button", "string"));
+			static::addProperty(new Property("third_section_button_link", "third_section_button_link", "string"));
+
+
 		}
 
 		/**
@@ -81,28 +66,28 @@
 		{
 			parent::formElements();
 
-			$this->addFormElement(new ImageElement('image_1', 'First Image'), "Content");
-			$this->addFormElement(new Text("banner_title", "Banner Title"), "Home Banner");
-			$this->addFormElement(new Editor("banner_text", "Banner Text"), "Home Banner");
-			$this->addFormElement(new Text("banner_button", "Banner Button"), "Home Banner");
+			if(PAGE_HAS_SLIDESHOW)
+			{
+				$this->addFormElement(new Checkbox("useSlideshow", 'Display slideshow'), "Slideshow");
 
-			$this->addFormElement(new Text("blue_1_link", "Blue Column 1 Link"), "Content");
-			$this->addFormElement(new Text("blue_1_title", "Blue Column 1 Title"), "Content");
-			$this->addFormElement(new Textarea("blue_1_text", "Blue Column 1 Text"), "Content");
+				/** @var ImageProperty $imageProperty */
+				$this->addFormElement(new GridElement('slides', 'Slides'), "Slideshow");
+			}
 
-			$this->addFormElement(new Text("blue_2_link", "Blue Column 2 Link"), "Content");
-			$this->addFormElement(new Text("blue_2_title", "Blue Column 2 Title"), "Content");
-			$this->addFormElement(new Textarea("blue_2_text", "Blue Column 2 Text"), "Content");
+			// $this->addFormElement(new Text("banner_title", "Banner Title"), "Home Banner");
+			// $this->addFormElement(new Editor("banner_text", "Banner Text"), "Home Banner");
+			// $this->addFormElement(new Text("banner_button", "Banner Button"), "Home Banner");
 
-			$this->addFormElement(new Text("blue_3_link", "Blue Column 3 Link"), "Content");
-			$this->addFormElement(new Text("blue_3_title", "Blue Column 3 Title"), "Content");
-			$this->addFormElement(new Textarea("blue_3_text", "Blue Column 3 Text"), "Content");
+			$this->addFormElement(new Text("second_section_title", "Second Section Title"), "Content");
+			$this->addFormElement(new Editor("second_section_text", "Second Section Text"), "Content");
+			$this->addFormElement(new Text("second_section_button", "Second Section Button"), "Content");
+			$this->addFormElement(new Text("second_section_button_link", "Second Section Button Link"), "Content");
 
-			$this->addFormElement(new Text("blue_4_link", "Blue Column 4 Link"), "Content");
-			$this->addFormElement(new Text("blue_4_title", "Blue Column 4 Title"), "Content");
-			$this->addFormElement(new Textarea("blue_4_text", "Blue Column 4 Text"), "Content");
 
-			$this->addFormElement(new ImageElement('image_2', 'Second Image'), "Content");	$this->addFormElement(new ImageElement('image_3', 'Third Image'), "Content");
+			$this->addFormElement(new Text("third_section_title", "Third Section Title"), "Content");
+			$this->addFormElement(new Editor("third_section_text", "Third Section Text"), "Content");
+			$this->addFormElement(new Text("third_section_button_link", "Third Section Button Link"), "Content");
+
 
 		}
 	}

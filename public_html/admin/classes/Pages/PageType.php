@@ -4,9 +4,13 @@
 	// use Blog\BlogController;
 	// use Blog\BlogPage;
 	use Configuration\Registry;
+	use Pages\Page;
 	use Pages\ContentPage;
-	use Pages\ServicingPage;
+	use Pages\ServicesPage;
 	use Pages\Home\HomePage;
+	use Pages\Home\HomeController;
+	use Projects\ProjectsController;
+	use Projects\ProjectsPage;
 	use Pages\FrontPage\FrontPageController;
 	// use Products\ProductsController;
 	// use Products\ProductsPage;
@@ -36,9 +40,20 @@
 					"Page" => new static()
 				];
 
-			if(Registry::isEnabled("Blog"))
+				$types["Contact"] = new static(Page::class, "general/contact-page", ContactPageController::class);
+
+				// custom page types
+				$types["Home"] = new static(HomePage::class, "general/home-page", HomeController::class);
+
+				$types["Page with Button"] = new static(ContentPage::class, "general/page-with-button");
+
+				$types["Staff"] = new static(Page::class, "general/staff-page");
+
+				$types["Services"] = new static(ServicesPage::class, "general/services-page");
+
+			if(Registry::isEnabled("Projects"))
 			{
-				$types["Blog"] = static::createWithController(Page::class, BlogController::class);
+				$types["Projects"] = static::createWithController(Page::class, ProjectsController::class);
 			}
 
 			if(Registry::isEnabled("FAQs"))
@@ -61,14 +76,7 @@
 				$types["Payments"] = new static(Page::class, "payments/payments-page", BillPaymentController::class);
 			}
 
-			$types["Contact"] = new static(Page::class, "general/contact-page", ContactPageController::class);
 
-			// custom page types
-			$types["Home"] = new static(HomePage::class, "general/home-page", FrontPageController::class);
-
-			$types["Page with Button"] = new static(ContentPage::class, "general/content-page");
-
-			$types["Servicing Page"] = new static(ServicingPage::class, "general/servicing-page");
 
 			return $types;
 		}

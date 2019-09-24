@@ -172,11 +172,6 @@ input[type=submit] {
 
 .header {
   border-top: 4px solid $PRIMARY-HIGHLIGHT;
-  background: $PRIMARY-HIGHLIGHT;
-
-  a:link, a:visited, a:active {
-    color: #fff;
-  }
 
   @include responsive {
     border-bottom: 4px solid $PRIMARY-HIGHLIGHT;

@@ -1,0 +1,18 @@
+<div class="gallery">
+	{% for item in gallery.galleryItems|active %}
+		<a id="image-{{ item.id }}" href="{{ item.image.getLink() }}"
+			title="{{ item.title }}"
+			data-src="{{ item.image.getLink() }}"
+			data-thumb="{{ item.thumbnail.getLink() }}"
+			data-sub-html="#image-{{ item.id }}-caption"
+			>
+			<figure style="background-image: url({{ item.thumbnail.getLink() }});" id="{{ item.id }}">
+				{% if item.title != '' %}
+					<figcaption class="caption" id="image-{{ item.id }}-caption">
+						<h3>{{ item.title }}</h3>
+					</figcaption>
+				{% endif %}
+			</figure>
+		</a>
+	{% endfor %}
+</div>

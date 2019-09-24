@@ -4,27 +4,38 @@
   <div class="container main-content">
     <h1>{{ page.contentTitle }}</h1>
     <div class="row first-row">
-      <div class="col-12 col-lg-6 mb-12 mb-lg-0 d-md-flex flex-column">
+      <div class="col-12 col-lg-6 mb-4 mb-lg-0 d-md-flex flex-column">
 
         {{ page.content|raw }}
 
-        <p>
-          Phone:
-          <a href="tel:{{ config.getPhoneDigits() }}">{{ config.phone }}</a><br/>
-          Email:
-          <a href="mailto:{{config.email }}">{{ config.email }}</a>
-        </p>
-
-        <h3>Opening Hours</h3>
-        <p class="mb-0">Monday - Friday: 07:30 - 17:30<br>
-        Saturday - Sunday: Closed</p>
       </div>
 
-      <div class="col-12 col-lg-6">
-          <h1>{{ contactForm.name }}</h1>
+      <div class="col-12 col-lg-6 mb-8">
+        <h3>{{ contactForm.name }}</h3>
         {{ contactForm.outputForm()|raw }}
       </div>
     </div>
+
+      <h3>Principle Office - {{ config.addressOneTitle }}</h3>
+      <div class="row">
+      <div class="col-12 col-lg-4">
+        <p class="mb-0">
+          {{ config.address|nl2br }}
+        </p>
       </div>
+      <div class="col-12 col-lg-5">
+        <p class="mb-0">
+          Phone:
+          <a href="tel:{{ config.getPhoneDigits() }}">{{ config.phoneOne }}</a><br/>
+          Email:
+          <a href="mailto:{{config.email }}">{{ config.email }}</a>
+        </p>
+      </div>
+      </div>
+
+      <div class="map mt-8">
+        {{ config.getMap()|raw }}
+      </div>
+  </div>
 
 {% endblock %}

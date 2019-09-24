@@ -1,249 +1,356 @@
-.slideshow
-{
-	// container
-	@extend %clearfix;
-	// MAIN SLIDESHOW
-	//// note: arrows and dots turned on/off in javascript
+// homepage-specific height
 
-	/// desktop sizing
-	/// scss to calculate the aspect ratio from the dimensions as defined in the slide classs (width / height)
-	/// this scales the slide no matter the screen width
-	/// a max-height can be used on .slide to override this for really wide screen.
-	$height: calc(100% * #{453 / 2560});
-	$main-height: calc(100% * #{823 / 2560});
+.Home {
+  .slideshow, .slick-slider {
 
-	/// mobile sizing (fixed height)
-	$responsive-height: 340px;
+    @include above($LG-BREAKPOINT) {
+      height: 550px;
+    }
 
-	overflow: hidden;
-	position: relative;
 
-	/// mobile-first
-	background: $LIGHT-COLOUR;
+    @include above($XL-BREAKPOINT) {
+      height: 650px;
+    }
 
-	.slide + .slide
-	{
-		display: none;
-	}
-	.slick-initialized .slide
-	{
-		display: block;
-	}
 
-	// slides
-	//// slide elements
-	.slide
-	{
-		overflow: hidden;
-		position: relative;
-		background-color: $LIGHT-COLOUR;
-		margin: 0;
-		padding: 0;
-		width: 100%;
-		text-align: center;
+    @include above($LAPTOP-BREAKPOINT) {
+      height: 889px;
+    }
+  }
+}
 
-		img
-		{
-			height: auto;
-			width: 100%;
-		}
+.slideshow {
 
-		.background-image
-		{
-			width: 100%;
-			background-position: center bottom;
-			background-repeat: no-repeat;
-			background-size: cover;
+  height: 400px;
 
-			&:after
-			{
-				content: '';
-				display: block;
-				position: relative;
-				padding-top: $responsive-height;
+  @include above($LG-BREAKPOINT) {
+    height: 550px;
+  }
 
-				@include above($SLIDESHOW-BREAKPOINT)
-				{
-					padding-top: $height;
-				}
 
-				html.Main &
-				{
-					@include above($SLIDESHOW-BREAKPOINT)
-					{
-						padding-top:  $main-height;
-					}
-				}
-			}
-		}
+  @include above($LAPTOP-BREAKPOINT) {
+    height: 788px;
+  }
+  // container
+  @extend %clearfix;
 
-		.small-screen
-		{
-			@include above($SLIDESHOW-BREAKPOINT)
-			{
-				display: none;
-			}
-		}
+  // MAIN SLIDESHOW
+  //// note: arrows and dots turned on/off in javascript
 
-		.small-screen + .big-screen
-		{
-			display: none;
+  /// desktop sizing
+  /// scss to calculate the aspect ratio from the dimensions as defined in the slide classs (width / height)
+  /// this scales the slide no matter the screen width
+  /// a max-height can be used on .slide to override this for really wide screen.
+  $height: calc(100% * #{453 / 2560});
+  $main-height: calc(100% * #{823 / 2560});
 
-			@include above($SLIDESHOW-BREAKPOINT)
-			{
-				display: block;
-			}
-		}
+  /// mobile sizing (fixed height)
+  $responsive-height: 340px;
 
-		.caption
-		{
-			display: flex;
-			align-items: center;
-			position: absolute;
-			top: 0;
-			right: 0;
-			bottom: 0;
-			left: 0;
-			z-index: 5;
-			//noinspection CssOptimizeSimilarProperties
-			background-position: center top;
-			//noinspection CssOptimizeSimilarProperties
-			background-repeat: no-repeat;
-			color: $DARK-COLOUR;
-			text-align: left;
-			text-transform: none;
-			transition: all 0.2s;
+  overflow: hidden;
+  position: relative;
 
-			@include above($RESPONSIVE-BREAKPOINT)
-			{
-				align-items: center;
-			}
+  /// mobile-first
+  background: $LIGHT-COLOUR;
 
-			@include above($MAX-WIDTH)
-			{
-				right: 0;
-				left: 0;
-			}
+  .slick-slider {
+    height: 400px;
 
-			h2
-			{
-				margin: 0;
-				color: $LIGHT-COLOUR;
-				font-size: 36px;
-				font-family: $CONTENT-FONT;
+    @include above($LG-BREAKPOINT) {
+      height: 550px;
+    }
 
-				@include above($CONTENT-WIDTH)
-				{
-					font-size: 60px;
-				}
-			}
-		}
-	}
+
+    @include above($XL-BREAKPOINT) {
+      height: 650px;
+    }
+
+
+    @include above($LAPTOP-BREAKPOINT) {
+      height: 889px;
+    }
+  }
+
+  .slick-list, .slick-track, .slider, .slide, .background-image {
+    height: 100%;
+  }
+
+  // for wrapping text content
+  .wrapper {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+
+    .col-12 {
+      @include below(1600) {
+        padding-left: 11rem;
+        padding-right: 11rem;
+      }
+
+
+      @include below($XL-BREAKPOINT) {
+        padding-left: 8rem;
+        padding-right: 8rem;
+      }
+
+
+      @include below($RESPONSIVE-BREAKPOINT) {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+    }
+
+    h2 {
+      margin-bottom: 0.5rem;
+      color: #fff;
+      font-size: 4rem;
+      text-shadow: 0px 0px 2px rgba(0, 0, 0, 0.4);
+
+      @include above($LG-BREAKPOINT) {
+        font-size: 5rem;
+      }
+
+
+      @include above($XL-BREAKPOINT) {
+        font-size: 6.6rem;
+      }
+    }
+
+    p {
+      text-shadow: 0px 0px 2px rgba(0, 0, 0, 0.4);
+      font-size: 2.4rem;
+      color: #fff;
+      font-weight: 300;
+
+      @include above($LG-BREAKPOINT) {
+        max-width: 50ch;
+      }
+    }
+  }
+
+  .slide + .slide {
+    display: none;
+  }
+
+  .slick-initialized .slide {
+    display: block;
+  }
+
+  // slides
+  //// slide elements
+  .slide {
+    overflow: hidden;
+    position: relative;
+    background-color: $LIGHT-COLOUR;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+
+    img {
+      height: auto;
+      width: 100%;
+    }
+
+    .background-image {
+      width: 100%;
+      background-position: center bottom;
+      background-repeat: no-repeat;
+      background-size: cover;
+
+      &:after {
+        content: '';
+        display: block;
+        position: relative;
+        padding-top: $responsive-height;
+
+        @include above($SLIDESHOW-BREAKPOINT) {
+          padding-top: $height;
+        }
+
+
+        html.Main & {
+          @include above($SLIDESHOW-BREAKPOINT) {
+            padding-top: $main-height;
+          }
+        }
+      }
+    }
+
+    .small-screen {
+      @include above($SLIDESHOW-BREAKPOINT) {
+        display: none;
+      }
+    }
+
+    .small-screen + .big-screen {
+      display: none;
+
+      @include above($SLIDESHOW-BREAKPOINT) {
+        display: block;
+      }
+    }
+
+    .caption {
+      display: flex;
+      align-items: center;
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 1;
+
+      //noinspection CssOptimizeSimilarProperties
+      background-position: center top;
+
+      //noinspection CssOptimizeSimilarProperties
+      background-repeat: no-repeat;
+      color: $DARK-COLOUR;
+      text-align: left;
+      text-transform: none;
+      transition: all 0.2s;
+
+      @include above($RESPONSIVE-BREAKPOINT) {
+        align-items: center;
+      }
+
+
+      @include above($MAX-WIDTH) {
+        right: 0;
+        left: 0;
+      }
+
+
+      h2 {
+        margin: 0;
+        color: $LIGHT-COLOUR;
+        font-size: 36px;
+        font-family: $CONTENT-FONT;
+
+        @include above($CONTENT-WIDTH) {
+          font-size: 60px;
+        }
+      }
+    }
+  }
 }
 
 //// navigation
-button.slick-arrow
-{
-	$arrow-inset: 10px;
-	$arrow-dimension: 18px;
+button.slick-arrow {
+  $arrow-inset: 40px;
+  $arrow-inset-sm: 0;
+  $arrow-dimension: 60px;
+  $arrow-dimension-sm: 40px;
 
-	overflow: hidden;
-	position: absolute;
-	top: 0;
-	bottom: 0;
-	margin: auto;
-	z-index: 100;
-	height: 60px;
-	width: 60px;
-	border: none;
-	border-radius: 50%;
-	background: $PRIMARY-HIGHLIGHT;
-	text-indent: -9999px;
-	cursor: pointer;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  z-index: 1;
+  height: 60px;
+  width: 60px;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  text-indent: -9999px;
+  cursor: pointer;
 
-	@include below($RESPONSIVE-BREAKPOINT)
-	{
-		//have to override an inline style
-		display: none !important;
-	}
+  @include below($RESPONSIVE-BREAKPOINT) {
+    //have to override an inline style
+    display: none !important;
+  }
 
-	&:before
-	{
-		content: '';
-		display: block;
-		position: absolute;
 
-		top: 0;
-		bottom: 0;
-		margin: auto;
-		border: 1px solid transparent;
-		border-top-color: $LIGHT-COLOUR;
-		border-left-color: $LIGHT-COLOUR;
-		height: $arrow-dimension;
-		width: $arrow-dimension;
-	}
+  &:before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    border: 1px solid transparent;
+    border-top-color: $LIGHT-COLOUR;
+    border-left-color: $LIGHT-COLOUR;
 
-	@include hover
-	{
-		opacity: 0.8;
-	}
+    @include below($XL-BREAKPOINT) {
+      height: $arrow-dimension-sm;
+      width: $arrow-dimension-sm;
+    }
 
-	&.slick-prev
-	{
-		//noinspection CssOverwrittenProperties
-		left: $arrow-inset;
 
-		&:before
-		{
-			transform: translateX(50%) translateX(#{$arrow-dimension / 4}) rotate(-45deg);
-			right: 50%;
-		}
-	}
+    height: $arrow-dimension;
+    width: $arrow-dimension;
+  }
 
-	&.slick-next
-	{
-		//noinspection CssOverwrittenProperties
-		right: $arrow-inset;
+  @include hover {
+    opacity: 0.8;
+  }
 
-		&:before
-		{
-			transform: translateX(50%) translateX(-#{$arrow-dimension / 4}) rotate(135deg);
-			right: 50%;
-		}
-	}
+
+  &.slick-prev {
+    //noinspection CssOverwrittenProperties
+    @include below($XL-BREAKPOINT) {
+      left: $arrow-inset-sm;
+    }
+
+
+    left: $arrow-inset;
+
+    &:before {
+      transform: translateX(50%) translateX(#{$arrow-dimension / 4}) rotate(-45deg);
+      right: 50%;
+    }
+  }
+
+  &.slick-next {
+    //noinspection CssOverwrittenProperties
+    @include below($XL-BREAKPOINT) {
+      right: $arrow-inset-sm;
+    }
+
+
+    right: $arrow-inset;
+
+    &:before {
+      transform: translateX(50%) translateX(-#{$arrow-dimension / 4}) rotate(135deg);
+      right: 50%;
+    }
+  }
 }
 
-ul.slick-dots
-{
-	position: absolute;
-	top: auto;
-	right: auto;
-	bottom: 20px;
-	left: 30px;
-	margin: 0;
-	padding: 0;
+ul.slick-dots {
+  position: absolute;
+  top: auto;
+  right: auto;
+  bottom: 20px;
+  left: 30px;
+  margin: 0;
+  padding: 0;
 
-	li
-	{
-		display: inline-block;
-		border: 1px solid $DARK-NEUTRAL-COLOUR;
-		border-radius: 50%;
-		height: 12px;
-		margin: 0 0 0 5px;
-		padding: 0;
-		width: 12px;
-		background: transparent;
-		text-indent: -1000000px;
-	}
+  li {
+    display: inline-block;
+    border: 1px solid $DARK-NEUTRAL-COLOUR;
+    border-radius: 50%;
+    height: 12px;
+    margin: 0 0 0 5px;
+    padding: 0;
+    width: 12px;
+    background: transparent;
+    text-indent: -1000000px;
+  }
 
-	li.slick-active
-	{
-		border: 1px solid $DARK-NEUTRAL-COLOUR;
-		background: $DARK-NEUTRAL-COLOUR;
-	}
+  li.slick-active {
+    border: 1px solid $DARK-NEUTRAL-COLOUR;
+    background: $DARK-NEUTRAL-COLOUR;
+  }
 
-	li:hover
-	{
-		cursor: pointer;
-	}
+  li:hover {
+    cursor: pointer;
+  }
 }

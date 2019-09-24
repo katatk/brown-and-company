@@ -119,6 +119,10 @@ form:not(.custom-form) {
 
   textarea {
     height: 180px;
+
+    @include above($LG-BREAKPOINT) {
+      height: 100px;
+    }
   }
 
   // input[type=text],

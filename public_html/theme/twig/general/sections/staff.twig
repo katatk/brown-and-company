@@ -1,0 +1,13 @@
+<div class="staff-container">
+  {% for staff in controller.callStatic('Staff', 'loadAllActive') %}
+    <div class="row">
+      <div class="col-12 mb-8 d-flex flex-column flex-lg-row ">
+        <div class="staff-img">{{ staff.image.tag()|raw }}</div>
+        <div class="staff-text">
+          <h3>{{ staff.name }}</h3>
+          <p>{{ staff.bio|nl2br }}</p>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+</div>

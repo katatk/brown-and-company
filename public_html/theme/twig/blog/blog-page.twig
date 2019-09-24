@@ -1,0 +1,22 @@
+{% extends 'template.twig' %}
+
+{% block content %}
+	{{ page.output()|raw }}
+
+	<div class="articles">
+		{% for article in articles.results %}
+			<div class="article-summary">
+				<a class="image" href="{{ article.path }}" style="background-image: url({% if article.thumbnail != null %}  {{ article.thumbnail.getLink() }} {% endif %})">
+				</a>
+				<div class="summary">
+					<h3>{{ article.title }}</h3>
+					<p>{{ article.summary|nl2br }} <a href="{{ article.path }}">Read more</a></p>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+
+	{% if articles.totalPages() > 1 %}
+		<div class="blog-pagination">{{ articles.generatePageLinks(page.getNavPath() ~ '?page=')|raw }}</div>
+	{% endif %}
+{% endblock %}

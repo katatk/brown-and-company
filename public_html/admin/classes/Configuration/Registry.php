@@ -2,6 +2,7 @@
 	namespace Configuration;
 
 	use Blog\BlogArticle;
+	use Projects\Project;
 	use Forms\Form;
 	use Galleries\Gallery;
 	use GoogleMaps\GoogleMap;
@@ -14,6 +15,7 @@
 	use Redirect;
 	use Menus\Menu;
 	use Testimonial;
+	use Staff;
 	use Users\Administrator;
 	use Users\User;
 
@@ -30,6 +32,7 @@
 		[
 			"Administrators" => true,
 			"Blog" => false,
+			"Projects" => true,
 			"Cart" => false,
 			"Configuration" => true,
 			"Discounts" => false,
@@ -43,13 +46,15 @@
 			"Payments" => false,
 			"Products" => false,
 			"Shipping" => false,
-			"Testimonials" => false,
+			"Testimonials" => true,
+			"Staff" => true,
 			"Users" => false
 		];
 
 		protected const ALIASES =
 		[
 			"BlogArticle" => BlogArticle::class,
+			"Project" => Project::class,
 			"Faq" => Faq::class,
 			"Form" => Form::class,
 			"Gallery" => Gallery::class,
@@ -92,9 +97,11 @@
 				Menu::getAdminNavItem(),
 				Page::getAdminNavItem(),
 				BlogArticle::getAdminNavItem(),
+				Project::getAdminNavItem(),
 				Form::getAdminNavItem(),
 				Gallery::getAdminNavItem(),
 				Testimonial::getAdminNavItem(),
+				Staff::getAdminNavItem(),
 				Administrator::getAdminNavItem(),
 				Configuration::getAdminNavItem(),
 				Redirect::getAdminNavItem(),

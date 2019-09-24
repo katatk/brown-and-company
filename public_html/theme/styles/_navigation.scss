@@ -1,78 +1,25 @@
-// .topbar
-// {
-//   a,
-//   p,
-//   span
-//   {
-//     line-height: 1;
-//     font-weight: 500;
-//   }
-//
-//   .phone
-//   {
-//     font-size: 1.8rem;
-//
-//     a:first-child
-//     {
-//       font-weight: 600;
-//     }
-//
-//     .icon-phone
-//     {
-//       font-size: 1.5rem;
-//     }
-//   }
-//
-//   .button
-//   {
-//     padding: 1.8rem 2rem;
-//   }
-// }
-
 // link padding (to calculate underline size hover/active)
 $horizontal-padding: 1.5rem;
 $db-horizontal-padding: $horizontal-padding * 2;
 
-// a larger breakpoint for nav menu to adjust padding/margin
-$nav-large: 1680px;
-
-// for adding the angle after the logo
-$sm-triangle: 83.67px;
-$lg-triangle: 113px;
-
-// .topbar {
-//   display: none;
-//
-//   @include above($NAV-BREAKPOINT) {
-//     height: 25px;
-//     z-index: 2;
-//     width: 100%;
-//     background-color: transparent;
-//     display: block;
-//     position: absolute;
-//     top: 0;
-//     left: 0;
-//   }
-// }
-
 header {
-  .d-custom-none {
-    font-size: 2rem;
+  padding-top: 2rem;
+  padding-bottom: 1rem;
+  z-index: 1;
 
-    @include above($SM-BREAKPOINT) {
-      font-size: inherit;
-    }
+  @include below($NAV-BREAKPOINT) {
+    background-color: #fff;
   }
 
+
   @include above($NAV-BREAKPOINT) {
-    margin-top: 25px;
     position: absolute;
-    z-index: 1;
   }
 
 
   .phone {
     font-size: 1.5rem;
+    font-weight: 600;
 
     @include above($NAV-BREAKPOINT) {
       font-size: 1.3rem;
@@ -81,100 +28,22 @@ header {
 
     @include above($LAPTOP-BREAKPOINT) {
       font-size: 1.5rem;
-    }
-  }
-
-  .button {
-    font-size: 1.5rem;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 1.5rem;
-    margin-bottom: 3rem;
-    font-weight: 500;
-    align-self: center;
-    justify-content: center;
-    width: auto;
-
-    @include above($NAV-BREAKPOINT) {
-      margin-left: 2rem;
-      margin-top: 0;
-      margin-bottom: 0;
-      font-size: 1.3rem;
-    }
-
-
-    @include above($LAPTOP-BREAKPOINT) {
-      font-size: 1.5rem;
-    }
-
-
-    @include above(1800) {
-      margin-left: 4rem;
     }
   }
 }
 
 nav[class*="navbar-expand-"] {
-  width: 100%;
-  height: 100%;
-  padding: 0;
-
-  @include above($NAV-BREAKPOINT) {
-    background: linear-gradient(to right, $PRIMARY-HIGHLIGHT 100px, rgba(0, 0, 0, 0.4) 100px);
-    width: calc(100% - 25px);
-  }
-
-
   & > .container {
-    position: relative;
-    height: 100%;
-    max-width: 100%;
-
     @include above($NAV-BREAKPOINT) {
       align-items: stretch;
       height: 100%;
-      margin-right: unset;
       align-items: center;
-      margin-left: 20px;
-      padding-right: 25px;
     }
 
 
-    > .d-flex {
-      width: 100%;
-      background: #000;
-      position: relative;
-
-      @include above($NAV-BREAKPOINT) {
-        background-color: $PRIMARY-HIGHLIGHT;
-        width: auto;
-      }
-
-
-      &::before {
-        @include above($NAV-BREAKPOINT) {
-          content: '';
-          background-color: transparent;
-          position: absolute;
-          width: 0;
-          height: 0;
-          right: -#{$sm-triangle};
-          bottom: 0;
-          border-left: $sm-triangle solid transparent;
-          border-right: $sm-triangle solid transparent;
-          border-top: $sm-triangle solid transparent;
-          border-bottom: $sm-triangle solid $PRIMARY-HIGHLIGHT;
-          z-index: 0;
-        }
-
-
-        @include above(1600) {
-          right: -#{$lg-triangle};
-          border-left: $lg-triangle solid transparent;
-          border-right: $lg-triangle solid transparent;
-          border-top: $lg-triangle solid transparent;
-          border-bottom: $lg-triangle solid $PRIMARY-HIGHLIGHT;
-        }
+    .d-flex {
+      @include below($NAV-BREAKPOINT) {
+        width: 100%;
       }
     }
   }
@@ -187,26 +56,14 @@ nav[class*="navbar-expand-"] {
 
     @include above($NAV-BREAKPOINT) {
       padding-top: 0;
-      height: 100%;
       justify-content: center;
-      margin-left: $sm-triangle;
-      height: 83.67px;
-    }
-
-
-    @include above($NAV-BREAKPOINT) {
-      margin-left: $lg-triangle;
-    }
-
-
-    @include above(1600) {
-      height: 113px;
     }
 
 
     // the li tag
     .nav-item {
-      padding-left: 3rem;
+      text-transform: uppercase;
+      font-weight: 400;
 
       @include above($NAV-BREAKPOINT) {
         padding-left: 0;
@@ -214,6 +71,7 @@ nav[class*="navbar-expand-"] {
         align-items: center;
         text-align: center;
         height: 100%;
+        padding: 0;
       }
 
 
@@ -222,13 +80,13 @@ nav[class*="navbar-expand-"] {
         z-index: 1;
         text-decoration: none;
         line-height: 1;
-        font-weight: 400;
+        font-weight: 600;
         color: #fff;
         font-family: $HEADING-FONT;
         text-transform: uppercase;
         text-align: left;
         font-size: 1.5rem;
-        padding: 1.5rem 2.5rem;
+        padding: 1.5rem 0 1.5rem 4rem;
         display: inline-block;
         text-align: left;
         width: 100%;
@@ -242,25 +100,21 @@ nav[class*="navbar-expand-"] {
           align-items: center;
           text-align: center;
           position: relative;
-          padding: 0 $horizontal-padding;
+          padding: 4rem $horizontal-padding;
           font-size: 1.3rem;
+          color: $PRIMARY-HIGHLIGHT;
 
           @include above($LAPTOP-BREAKPOINT) {
             font-size: 1.5rem;
           }
 
 
-          @include above($nav-large) {
-            padding: 0 2rem;
-          }
-
-
           &::before {
             content: '';
             height: 2px;
-            width: 100%;
+            width: calc(100% - #{$db-horizontal-padding});
             position: absolute;
-            left: 0;
+            left: $horizontal-padding;
             bottom: 0;
             transform: scaleX(0);
             transition: all 0.3s ease-in-out 0s;
@@ -284,8 +138,8 @@ nav[class*="navbar-expand-"] {
             height: 2px;
             position: absolute;
             bottom: 0;
-            left: 0;
-            min-width: 100%;
+            left: $horizontal-padding;
+            min-width: calc(100% - #{$db-horizontal-padding});
             -webkit-transform: scaleX(1);
             transform: scaleX(1);
             display: inline-block;
@@ -305,12 +159,11 @@ nav[class*="navbar-expand-"] {
         }
 
 
-        @include above($nav-large) {
-          .nav-link::before {
-            width: calc(100% - 2rem + 1.7rem + 4px);
-          }
-        }
-
+        // @include above($nav-large) {
+        //   .nav-link::before {
+        //     width: calc(100% - 2rem + 1.7rem + 4px);
+        //   }
+        // }
 
         .dropdown-toggle {
           margin-left: -28px;
@@ -422,12 +275,10 @@ nav[class*="navbar-expand-"] {
 
 // logo styles
 .logo-container {
-  margin: 3rem 20px 3rem 20px;
-  z-index: 2;
+  position: relative;
+  top: -1rem;
 
-  @include above(1600) {
-    margin: 4rem 0;
-  }
+  @include above($NAV-BREAKPOINT) {}
 
 
   // the a class
@@ -438,24 +289,35 @@ nav[class*="navbar-expand-"] {
     .logo {
       height: auto;
       display: inline-block;
-      width: 100%;
+      width: 243px;
 
-      @include below(1600) {
-        max-width: 305px;
+      @include above($NAV-BREAKPOINT) {
+        width: 100%;
       }
     }
   }
 }
 
+// the mobile dropdown
 .navbar-collapse {
-  background-color: rgba(0, 0, 0, 0.9);
+  background-color: rgba($PRIMARY-HIGHLIGHT, 0.95);
   opacity: 0;
+  visibility: hidden;
   position: absolute;
-  top: 100%;
+  top: calc(100% + 1rem);
   left: 0;
   width: 100%;
+  height: 400px;
+  justify-content: center;
+  display: flex;
+
+  @include above($LG-BREAKPOINT) {
+    height: 550px;
+  }
+
 
   @include above($NAV-BREAKPOINT) {
+    height: auto;
     padding: 0;
     position: static;
     width: auto;
@@ -466,6 +328,7 @@ nav[class*="navbar-expand-"] {
   &:not(.show) {
     @include above($NAV-BREAKPOINT) {
       opacity: 1;
+      visibility: visible;
     }
   }
 
@@ -473,16 +336,17 @@ nav[class*="navbar-expand-"] {
     transition: opacity 0.5s ease-in-out 0s;
     opacity: 1;
     z-index: 3;
+    visibility: visible;
   }
 }
 
 // mobile toggler
 .navbar-toggler {
-  margin-right: 20px;
   border: none;
   padding: 0.5rem;
   cursor: pointer;
   left: 0.5rem;
+  margin-left: 3rem;
 
   &:focus {
     outline: none;
@@ -490,7 +354,7 @@ nav[class*="navbar-expand-"] {
 
   .navbar-toggler-icon {
     background-image: none;
-    width: 26px;
+    width: 30px;
     height: 22px;
     position: relative;
     cursor: pointer;
@@ -498,9 +362,9 @@ nav[class*="navbar-expand-"] {
     span {
       display: block;
       position: absolute;
-      height: 3px;
+      height: 2px;
       width: 100%;
-      background: #fff;
+      background: $PRIMARY-HIGHLIGHT;
       border-radius: 9px;
       opacity: 1;
       left: 0;
@@ -534,7 +398,7 @@ nav[class*="navbar-expand-"] {
     &:nth-child(1) {
       -webkit-transform: rotate(45deg);
       transform: rotate(45deg);
-      top: 0;
+      top: -2.1px;
       left: 0;
     }
 
